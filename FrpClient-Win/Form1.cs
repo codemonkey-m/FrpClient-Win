@@ -15,6 +15,11 @@ namespace FrpClient_Win
             Control.CheckForIllegalCrossThreadCalls = false;
         }
 
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            CloseFrp();
+        }
+
         private void OnMainFormLoad(object sender, EventArgs e)
         {
             InitList(true);
@@ -42,11 +47,7 @@ namespace FrpClient_Win
 
         private void RestartService_Click(object sender, EventArgs e)
         {
-            if(null != frp_process)
-            {
-                frp_process.Kill();
-                frp_process.Close();
-            }
+            CloseFrp();
 
             if (!System.IO.File.Exists(DB.strFileName))
             {
@@ -68,6 +69,16 @@ namespace FrpClient_Win
 
             bStatus = true;
             UpdateStartButton();
+        }
+
+        private void CloseFrp()
+        {
+            if (null == frp_process)
+                return;
+
+            frp_process.Kill();
+            frp_process.Close();
+            frp_process = null;
         }
 
         private void OnFrpExit(Object sender, EventArgs e)
@@ -109,5 +120,6 @@ namespace FrpClient_Win
             else
                 RestartService.Text = "启动服务";
         }
+
     }
 }

@@ -36,7 +36,7 @@ namespace FrpClient_Win
 
         private const string strServerAddr = "server_addr";
         private const string strServerPort = "server_port";
-        private const string strServerToken = "auth_token";
+        private const string strServerToken = "token";
 
         private const string strFrpType = "type";
         private const string strLocalPort = "local_port";
@@ -155,8 +155,6 @@ namespace FrpClient_Win
 
             return true;
         }
-
-
 
         public static string GetValue(string sectionName, string key, string filePath = strFileName)
         {

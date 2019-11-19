@@ -152,6 +152,7 @@
             this.Controls.Add(this.RestartService);
             this.Name = "MainForm";
             this.Text = "Frp客户端";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.OnMainFormLoad);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
