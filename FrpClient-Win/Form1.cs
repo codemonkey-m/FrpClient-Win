@@ -17,13 +17,21 @@ namespace FrpClient_Win
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            CloseFrp();
+            if(e.CloseReason == CloseReason.UserClosing) {
+                e.Cancel = true;
+                this.Hide();
+                this.notifyIcon.Visible = true;
+                this.ShowInTaskbar = false;
+                return;
+            }
         }
 
         private void OnMainFormLoad(object sender, EventArgs e)
         {
             InitList(true);
             UpdateStartButton();
+            notifyIcon.Icon = this.Icon;
+            notifyIcon.Text = this.Text;
         }
 
         private void InitList(bool bReadConfig = false)
@@ -51,9 +59,16 @@ namespace FrpClient_Win
 
             if (!System.IO.File.Exists(DB.strFileName))
             {
-                MessageBox.Show("未配置服务器,无法启动.");
+                MessageBox.Show("未配置服务器，无法启动。");
                 return;
             }
+
+            if(!System.IO.File.Exists("frpc.exe")) {
+                MessageBox.Show("未找到 frpc.exe ，无法启动。");
+                return;
+            }
+
+            ProcOutput.Text = "启动服务...\r\n";
 
             frp_process = new Process();
             frp_process.StartInfo.FileName = "frpc.exe";
@@ -62,13 +77,23 @@ namespace FrpClient_Win
 
             frp_process.StartInfo.CreateNoWindow = true;
             frp_process.StartInfo.RedirectStandardOutput = true;
+            frp_process.OutputDataReceived += new DataReceivedEventHandler(MyProcOutputHandler);
             frp_process.StartInfo.UseShellExecute = false;
-
             frp_process.EnableRaisingEvents = true;
             frp_process.Start();
+            frp_process.BeginOutputReadLine();
 
             bStatus = true;
             UpdateStartButton();
+        }
+
+        private void MyProcOutputHandler(object sendingProcess,DataReceivedEventArgs outLine)
+        {
+            if(!String.IsNullOrEmpty(outLine.Data)) {
+                ProcOutput.Text += outLine.Data.ToString()+"\r\n";
+                ProcOutput.SelectionStart = ProcOutput.Text.Length;
+                ProcOutput.ScrollToCaret();
+            }
         }
 
         private void CloseFrp()
@@ -121,5 +146,16 @@ namespace FrpClient_Win
                 RestartService.Text = "启动服务";
         }
 
+        private void NotifyIcon_MouseClick(object sender, MouseEventArgs e) {
+            if(e.Button == System.Windows.Forms.MouseButtons.Left) {
+                this.Show();
+                this.Activate();
+                this.ShowInTaskbar = true;
+            }
+        }
+        private void Exit_toolStripMenuItem_Click(object sender, EventArgs e) {
+            CloseFrp();
+            Application.Exit();
+        }
     }
 }

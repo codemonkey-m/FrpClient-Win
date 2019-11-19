@@ -31,6 +31,8 @@
             this.SaveServerConfig = new System.Windows.Forms.Button();
             this.CancelConfig = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.FrpUser = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.FrpToken = new System.Windows.Forms.TextBox();
             this.FrpServerPort = new System.Windows.Forms.TextBox();
             this.FrpServerIp = new System.Windows.Forms.TextBox();
@@ -43,7 +45,7 @@
             // SaveServerConfig
             // 
             this.SaveServerConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.SaveServerConfig.Location = new System.Drawing.Point(180, 158);
+            this.SaveServerConfig.Location = new System.Drawing.Point(174, 174);
             this.SaveServerConfig.Name = "SaveServerConfig";
             this.SaveServerConfig.Size = new System.Drawing.Size(75, 23);
             this.SaveServerConfig.TabIndex = 0;
@@ -54,7 +56,7 @@
             // CancelConfig
             // 
             this.CancelConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.CancelConfig.Location = new System.Drawing.Point(261, 158);
+            this.CancelConfig.Location = new System.Drawing.Point(261, 174);
             this.CancelConfig.Name = "CancelConfig";
             this.CancelConfig.Size = new System.Drawing.Size(75, 23);
             this.CancelConfig.TabIndex = 1;
@@ -67,18 +69,38 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.FrpUser);
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.FrpToken);
             this.groupBox1.Controls.Add(this.FrpServerPort);
             this.groupBox1.Controls.Add(this.FrpServerIp);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(13, 13);
+            this.groupBox1.Location = new System.Drawing.Point(13, 9);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(323, 139);
+            this.groupBox1.Size = new System.Drawing.Size(323, 155);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "服务器数据";
+            // 
+            // FrpUser
+            // 
+            this.FrpUser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.FrpUser.Location = new System.Drawing.Point(114, 118);
+            this.FrpUser.Name = "FrpUser";
+            this.FrpUser.Size = new System.Drawing.Size(183, 21);
+            this.FrpUser.TabIndex = 7;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(18, 121);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(65, 12);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "用户标识符";
             // 
             // FrpToken
             // 
@@ -123,7 +145,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(71, 12);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Frp服务端口";
+            this.label2.Text = "frp服务端口";
             // 
             // label1
             // 
@@ -132,17 +154,21 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 12);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Frp服务器IP";
+            this.label1.Text = "frp服务器IP";
             // 
             // ServerConfigDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(348, 193);
+            this.ClientSize = new System.Drawing.Size(348, 206);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.CancelConfig);
             this.Controls.Add(this.SaveServerConfig);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ServerConfigDlg";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "服务器配置";
             this.Load += new System.EventHandler(this.OnConfigDlgLoad);
             this.groupBox1.ResumeLayout(false);
@@ -162,5 +188,7 @@
         private System.Windows.Forms.TextBox FrpToken;
         private System.Windows.Forms.TextBox FrpServerPort;
         private System.Windows.Forms.TextBox FrpServerIp;
+        private System.Windows.Forms.TextBox FrpUser;
+        private System.Windows.Forms.Label label4;
     }
 }
