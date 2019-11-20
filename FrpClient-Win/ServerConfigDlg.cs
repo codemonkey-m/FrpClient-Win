@@ -21,6 +21,7 @@ namespace FrpClient_Win
             DB.Instance().cServerinfo.strIp = FrpServerIp.Text;
             DB.Instance().cServerinfo.nPort = Convert.ToInt32(FrpServerPort.Text);
             DB.Instance().cServerinfo.strToken = FrpToken.Text;
+            DB.Instance().cServerinfo.strUser = FrpUser.Text;
 
             DB.Instance().SaveConfig();
             Close();
@@ -32,6 +33,7 @@ namespace FrpClient_Win
             FrpServerIp.Text = DB.Instance().cServerinfo.strIp;
             FrpServerPort.Text = DB.Instance().cServerinfo.nPort.ToString();
             FrpToken.Text = DB.Instance().cServerinfo.strToken;
+            FrpUser.Text = DB.Instance().cServerinfo.strUser;
         }
     }
 }

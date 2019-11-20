@@ -35,14 +35,14 @@
             this.AddDomain = new System.Windows.Forms.Label();
             this.AddSectionName = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.InputAddLoaclPort = new System.Windows.Forms.TextBox();
-            this.InputAddLoaclIP = new System.Windows.Forms.TextBox();
-            this.InputAddRemotePort = new System.Windows.Forms.TextBox();
-            this.InputAddDomain = new System.Windows.Forms.TextBox();
+            this.InputAddType = new System.Windows.Forms.ComboBox();
             this.InputAddSectionName = new System.Windows.Forms.TextBox();
+            this.InputAddDomain = new System.Windows.Forms.TextBox();
+            this.InputAddRemotePort = new System.Windows.Forms.TextBox();
+            this.InputAddLoaclIP = new System.Windows.Forms.TextBox();
+            this.InputAddLoaclPort = new System.Windows.Forms.TextBox();
             this.AddItem = new System.Windows.Forms.Button();
             this.CancelAdd = new System.Windows.Forms.Button();
-            this.InputAddType = new System.Windows.Forms.ComboBox();
             this.DeleteItem = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -50,7 +50,7 @@
             // AddType
             // 
             this.AddType.AutoSize = true;
-            this.AddType.Location = new System.Drawing.Point(65, 29);
+            this.AddType.Location = new System.Drawing.Point(65, 25);
             this.AddType.Name = "AddType";
             this.AddType.Size = new System.Drawing.Size(29, 12);
             this.AddType.TabIndex = 0;
@@ -59,7 +59,7 @@
             // AddLoaclPort
             // 
             this.AddLoaclPort.AutoSize = true;
-            this.AddLoaclPort.Location = new System.Drawing.Point(41, 60);
+            this.AddLoaclPort.Location = new System.Drawing.Point(41, 56);
             this.AddLoaclPort.Name = "AddLoaclPort";
             this.AddLoaclPort.Size = new System.Drawing.Size(53, 12);
             this.AddLoaclPort.TabIndex = 1;
@@ -68,7 +68,7 @@
             // AddLoaclIP
             // 
             this.AddLoaclIP.AutoSize = true;
-            this.AddLoaclIP.Location = new System.Drawing.Point(53, 91);
+            this.AddLoaclIP.Location = new System.Drawing.Point(53, 87);
             this.AddLoaclIP.Name = "AddLoaclIP";
             this.AddLoaclIP.Size = new System.Drawing.Size(41, 12);
             this.AddLoaclIP.TabIndex = 2;
@@ -77,7 +77,7 @@
             // AddRemotePort
             // 
             this.AddRemotePort.AutoSize = true;
-            this.AddRemotePort.Location = new System.Drawing.Point(41, 122);
+            this.AddRemotePort.Location = new System.Drawing.Point(41, 118);
             this.AddRemotePort.Name = "AddRemotePort";
             this.AddRemotePort.Size = new System.Drawing.Size(53, 12);
             this.AddRemotePort.TabIndex = 3;
@@ -86,7 +86,7 @@
             // AddDomain
             // 
             this.AddDomain.AutoSize = true;
-            this.AddDomain.Location = new System.Drawing.Point(41, 153);
+            this.AddDomain.Location = new System.Drawing.Point(41, 149);
             this.AddDomain.Name = "AddDomain";
             this.AddDomain.Size = new System.Drawing.Size(53, 12);
             this.AddDomain.TabIndex = 4;
@@ -95,7 +95,7 @@
             // AddSectionName
             // 
             this.AddSectionName.AutoSize = true;
-            this.AddSectionName.Location = new System.Drawing.Point(41, 184);
+            this.AddSectionName.Location = new System.Drawing.Point(41, 180);
             this.AddSectionName.Name = "AddSectionName";
             this.AddSectionName.Size = new System.Drawing.Size(53, 12);
             this.AddSectionName.TabIndex = 5;
@@ -118,79 +118,12 @@
             this.groupBox1.Controls.Add(this.AddRemotePort);
             this.groupBox1.Controls.Add(this.AddType);
             this.groupBox1.Controls.Add(this.AddLoaclPort);
-            this.groupBox1.Location = new System.Drawing.Point(13, 13);
+            this.groupBox1.Location = new System.Drawing.Point(13, 10);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(370, 221);
+            this.groupBox1.Size = new System.Drawing.Size(370, 214);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "条目配置";
-            // 
-            // InputAddLoaclPort
-            // 
-            this.InputAddLoaclPort.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.InputAddLoaclPort.Location = new System.Drawing.Point(116, 57);
-            this.InputAddLoaclPort.Name = "InputAddLoaclPort";
-            this.InputAddLoaclPort.Size = new System.Drawing.Size(231, 21);
-            this.InputAddLoaclPort.TabIndex = 7;
-            // 
-            // InputAddLoaclIP
-            // 
-            this.InputAddLoaclIP.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.InputAddLoaclIP.Location = new System.Drawing.Point(116, 88);
-            this.InputAddLoaclIP.Name = "InputAddLoaclIP";
-            this.InputAddLoaclIP.Size = new System.Drawing.Size(231, 21);
-            this.InputAddLoaclIP.TabIndex = 8;
-            // 
-            // InputAddRemotePort
-            // 
-            this.InputAddRemotePort.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.InputAddRemotePort.Location = new System.Drawing.Point(116, 119);
-            this.InputAddRemotePort.Name = "InputAddRemotePort";
-            this.InputAddRemotePort.Size = new System.Drawing.Size(231, 21);
-            this.InputAddRemotePort.TabIndex = 9;
-            // 
-            // InputAddDomain
-            // 
-            this.InputAddDomain.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.InputAddDomain.Location = new System.Drawing.Point(116, 150);
-            this.InputAddDomain.Name = "InputAddDomain";
-            this.InputAddDomain.Size = new System.Drawing.Size(231, 21);
-            this.InputAddDomain.TabIndex = 10;
-            // 
-            // InputAddSectionName
-            // 
-            this.InputAddSectionName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.InputAddSectionName.Location = new System.Drawing.Point(116, 181);
-            this.InputAddSectionName.Name = "InputAddSectionName";
-            this.InputAddSectionName.Size = new System.Drawing.Size(231, 21);
-            this.InputAddSectionName.TabIndex = 11;
-            // 
-            // AddItem
-            // 
-            this.AddItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.AddItem.Location = new System.Drawing.Point(198, 245);
-            this.AddItem.Name = "AddItem";
-            this.AddItem.Size = new System.Drawing.Size(75, 23);
-            this.AddItem.TabIndex = 7;
-            this.AddItem.Text = "确定";
-            this.AddItem.UseVisualStyleBackColor = true;
-            this.AddItem.Click += new System.EventHandler(this.AddItem_Click);
-            // 
-            // CancelAdd
-            // 
-            this.CancelAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.CancelAdd.Location = new System.Drawing.Point(285, 245);
-            this.CancelAdd.Name = "CancelAdd";
-            this.CancelAdd.Size = new System.Drawing.Size(75, 23);
-            this.CancelAdd.TabIndex = 8;
-            this.CancelAdd.Text = "取消";
-            this.CancelAdd.UseVisualStyleBackColor = true;
-            this.CancelAdd.Click += new System.EventHandler(this.CancelAdd_Click);
             // 
             // InputAddType
             // 
@@ -202,15 +135,83 @@
             "udp",
             "http",
             "https"});
-            this.InputAddType.Location = new System.Drawing.Point(116, 26);
+            this.InputAddType.Location = new System.Drawing.Point(116, 22);
             this.InputAddType.Name = "InputAddType";
             this.InputAddType.Size = new System.Drawing.Size(231, 20);
-            this.InputAddType.TabIndex = 12;
+            this.InputAddType.TabIndex = 6;
+            // 
+            // InputAddSectionName
+            // 
+            this.InputAddSectionName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.InputAddSectionName.Location = new System.Drawing.Point(116, 177);
+            this.InputAddSectionName.Name = "InputAddSectionName";
+            this.InputAddSectionName.Size = new System.Drawing.Size(231, 21);
+            this.InputAddSectionName.TabIndex = 5;
+            // 
+            // InputAddDomain
+            // 
+            this.InputAddDomain.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.InputAddDomain.Location = new System.Drawing.Point(116, 146);
+            this.InputAddDomain.Name = "InputAddDomain";
+            this.InputAddDomain.Size = new System.Drawing.Size(231, 21);
+            this.InputAddDomain.TabIndex = 4;
+            // 
+            // InputAddRemotePort
+            // 
+            this.InputAddRemotePort.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.InputAddRemotePort.Location = new System.Drawing.Point(116, 115);
+            this.InputAddRemotePort.Name = "InputAddRemotePort";
+            this.InputAddRemotePort.Size = new System.Drawing.Size(231, 21);
+            this.InputAddRemotePort.TabIndex = 3;
+            // 
+            // InputAddLoaclIP
+            // 
+            this.InputAddLoaclIP.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.InputAddLoaclIP.Location = new System.Drawing.Point(116, 84);
+            this.InputAddLoaclIP.Name = "InputAddLoaclIP";
+            this.InputAddLoaclIP.Size = new System.Drawing.Size(231, 21);
+            this.InputAddLoaclIP.TabIndex = 2;
+            // 
+            // InputAddLoaclPort
+            // 
+            this.InputAddLoaclPort.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.InputAddLoaclPort.Location = new System.Drawing.Point(116, 53);
+            this.InputAddLoaclPort.Name = "InputAddLoaclPort";
+            this.InputAddLoaclPort.Size = new System.Drawing.Size(231, 21);
+            this.InputAddLoaclPort.TabIndex = 1;
+            // 
+            // AddItem
+            // 
+            this.AddItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.AddItem.Location = new System.Drawing.Point(221, 230);
+            this.AddItem.Name = "AddItem";
+            this.AddItem.Size = new System.Drawing.Size(75, 23);
+            this.AddItem.TabIndex = 7;
+            this.AddItem.Text = "确定";
+            this.AddItem.UseVisualStyleBackColor = true;
+            this.AddItem.Click += new System.EventHandler(this.AddItem_Click);
+            // 
+            // CancelAdd
+            // 
+            this.CancelAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.CancelAdd.Location = new System.Drawing.Point(308, 230);
+            this.CancelAdd.Name = "CancelAdd";
+            this.CancelAdd.Size = new System.Drawing.Size(75, 23);
+            this.CancelAdd.TabIndex = 8;
+            this.CancelAdd.Text = "取消";
+            this.CancelAdd.UseVisualStyleBackColor = true;
+            this.CancelAdd.Click += new System.EventHandler(this.CancelAdd_Click);
             // 
             // DeleteItem
             // 
+            this.DeleteItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.DeleteItem.ForeColor = System.Drawing.Color.Red;
-            this.DeleteItem.Location = new System.Drawing.Point(108, 245);
+            this.DeleteItem.Location = new System.Drawing.Point(13, 230);
             this.DeleteItem.Name = "DeleteItem";
             this.DeleteItem.Size = new System.Drawing.Size(75, 23);
             this.DeleteItem.TabIndex = 9;
@@ -222,12 +223,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(395, 280);
+            this.ClientSize = new System.Drawing.Size(395, 261);
             this.Controls.Add(this.DeleteItem);
             this.Controls.Add(this.CancelAdd);
             this.Controls.Add(this.AddItem);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AddItemDlg";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "新增/修改条目";
             this.Load += new System.EventHandler(this.OnAddItemDlgLoad);
             this.groupBox1.ResumeLayout(false);
