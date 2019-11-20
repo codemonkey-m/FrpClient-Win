@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using Microsoft.Win32;
 
 namespace FrpClient_Win
 {
@@ -8,11 +9,16 @@ namespace FrpClient_Win
     {
         Process frp_process = null;
         bool bStatus = false;
+        const string strRegName = "FrpClient";
+        const string strAutoRun = "autorun";
 
         public MainForm()
         {
             InitializeComponent();
             Control.CheckForIllegalCrossThreadCalls = false;
+
+            //判断开机启动状态
+            AutoRun.Checked = CheckRegExists(strRegName);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -32,6 +38,14 @@ namespace FrpClient_Win
             UpdateStartButton();
             notifyIcon.Icon = this.Icon;
             notifyIcon.Text = this.Text;
+
+            //设置自启之后,开机启动要直接启动frp
+            if (AutoRun.Checked)
+            {
+                string[] strArgs = Environment.GetCommandLineArgs();
+                if (strArgs.Length >= 2 && strArgs[1].Equals(strAutoRun))
+                    RestartService_Click(null, null);
+            }
         }
 
         private void InitList(bool bReadConfig = false)
@@ -144,6 +158,7 @@ namespace FrpClient_Win
                 RestartService.Text = "重启服务";
             else
                 RestartService.Text = "启动服务";
+
         }
 
         private void NotifyIcon_MouseClick(object sender, MouseEventArgs e) {
@@ -156,6 +171,35 @@ namespace FrpClient_Win
         private void Exit_toolStripMenuItem_Click(object sender, EventArgs e) {
             CloseFrp();
             Application.Exit();
+        }
+
+        private void AutoRun_Click(object sender, EventArgs e)
+        {
+            //存在就删除,不存在就新增
+            if (CheckRegExists(strRegName, true))
+                AutoRun.Checked = false;
+            else
+                AutoRun.Checked = true;
+        }
+
+        //检查注册表项存在
+        private bool CheckRegExists(string strName, bool bHandle = false)
+        {
+            bool bRet = false;
+            RegistryKey reAutoRun = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
+            if (null != reAutoRun.GetValue(strName))
+                bRet = true;
+
+            if (bHandle)
+            {
+                if (!bRet)  //没有的时候创建
+                    reAutoRun.SetValue(strName, String.Format("\"{0}\" {1}", System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName, strAutoRun));
+                else        //有的话就删除
+                    reAutoRun.DeleteValue(strName);
+            }
+
+            reAutoRun.Close();
+            return bRet;
         }
     }
 }

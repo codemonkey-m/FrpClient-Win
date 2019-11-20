@@ -44,6 +44,7 @@
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.exit_toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AutoRun = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -172,9 +173,10 @@
             // contextMenuStrip
             // 
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AutoRun,
             this.exit_toolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(181, 48);
+            this.contextMenuStrip.Size = new System.Drawing.Size(181, 70);
             // 
             // exit_toolStripMenuItem
             // 
@@ -182,6 +184,13 @@
             this.exit_toolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exit_toolStripMenuItem.Text = "退出";
             this.exit_toolStripMenuItem.Click += new System.EventHandler(this.Exit_toolStripMenuItem_Click);
+            // 
+            // AutoRun
+            // 
+            this.AutoRun.Name = "AutoRun";
+            this.AutoRun.Size = new System.Drawing.Size(180, 22);
+            this.AutoRun.Text = "开机启动";
+            this.AutoRun.Click += new System.EventHandler(this.AutoRun_Click);
             // 
             // MainForm
             // 
@@ -221,6 +230,7 @@
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem exit_toolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AutoRun;
     }
 }
 
