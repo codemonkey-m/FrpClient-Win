@@ -35,6 +35,9 @@
             this.AddDomain = new System.Windows.Forms.Label();
             this.AddSectionName = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.AddTranOpt = new System.Windows.Forms.Label();
+            this.CheckAddUseCompression = new System.Windows.Forms.CheckBox();
+            this.CheckAddUseEncryption = new System.Windows.Forms.CheckBox();
             this.InputAddType = new System.Windows.Forms.ComboBox();
             this.InputAddSectionName = new System.Windows.Forms.TextBox();
             this.InputAddDomain = new System.Windows.Forms.TextBox();
@@ -106,6 +109,9 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.AddTranOpt);
+            this.groupBox1.Controls.Add(this.CheckAddUseCompression);
+            this.groupBox1.Controls.Add(this.CheckAddUseEncryption);
             this.groupBox1.Controls.Add(this.InputAddType);
             this.groupBox1.Controls.Add(this.InputAddSectionName);
             this.groupBox1.Controls.Add(this.InputAddDomain);
@@ -120,10 +126,39 @@
             this.groupBox1.Controls.Add(this.AddLoaclPort);
             this.groupBox1.Location = new System.Drawing.Point(13, 10);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(370, 214);
+            this.groupBox1.Size = new System.Drawing.Size(370, 238);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "条目配置";
+            // 
+            // AddTranOpt
+            // 
+            this.AddTranOpt.AutoSize = true;
+            this.AddTranOpt.Location = new System.Drawing.Point(41, 211);
+            this.AddTranOpt.Name = "AddTranOpt";
+            this.AddTranOpt.Size = new System.Drawing.Size(53, 12);
+            this.AddTranOpt.TabIndex = 9;
+            this.AddTranOpt.Text = "传输选项";
+            // 
+            // CheckAddUseCompression
+            // 
+            this.CheckAddUseCompression.AutoSize = true;
+            this.CheckAddUseCompression.Location = new System.Drawing.Point(170, 210);
+            this.CheckAddUseCompression.Name = "CheckAddUseCompression";
+            this.CheckAddUseCompression.Size = new System.Drawing.Size(48, 16);
+            this.CheckAddUseCompression.TabIndex = 8;
+            this.CheckAddUseCompression.Text = "压缩";
+            this.CheckAddUseCompression.UseVisualStyleBackColor = true;
+            // 
+            // CheckAddUseEncryption
+            // 
+            this.CheckAddUseEncryption.AutoSize = true;
+            this.CheckAddUseEncryption.Location = new System.Drawing.Point(116, 210);
+            this.CheckAddUseEncryption.Name = "CheckAddUseEncryption";
+            this.CheckAddUseEncryption.Size = new System.Drawing.Size(48, 16);
+            this.CheckAddUseEncryption.TabIndex = 7;
+            this.CheckAddUseEncryption.Text = "加密";
+            this.CheckAddUseEncryption.UseVisualStyleBackColor = true;
             // 
             // InputAddType
             // 
@@ -166,6 +201,7 @@
             this.InputAddRemotePort.Name = "InputAddRemotePort";
             this.InputAddRemotePort.Size = new System.Drawing.Size(231, 21);
             this.InputAddRemotePort.TabIndex = 3;
+            this.InputAddRemotePort.DoubleClick += new System.EventHandler(this.InputAddRemotePort_DoubleClick);
             // 
             // InputAddLoaclIP
             // 
@@ -175,6 +211,7 @@
             this.InputAddLoaclIP.Name = "InputAddLoaclIP";
             this.InputAddLoaclIP.Size = new System.Drawing.Size(231, 21);
             this.InputAddLoaclIP.TabIndex = 2;
+            this.InputAddLoaclIP.DoubleClick += new System.EventHandler(this.InputAddLoaclIP_DoubleClick);
             // 
             // InputAddLoaclPort
             // 
@@ -188,7 +225,7 @@
             // AddItem
             // 
             this.AddItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.AddItem.Location = new System.Drawing.Point(221, 230);
+            this.AddItem.Location = new System.Drawing.Point(221, 258);
             this.AddItem.Name = "AddItem";
             this.AddItem.Size = new System.Drawing.Size(75, 23);
             this.AddItem.TabIndex = 7;
@@ -199,7 +236,7 @@
             // CancelAdd
             // 
             this.CancelAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.CancelAdd.Location = new System.Drawing.Point(308, 230);
+            this.CancelAdd.Location = new System.Drawing.Point(308, 258);
             this.CancelAdd.Name = "CancelAdd";
             this.CancelAdd.Size = new System.Drawing.Size(75, 23);
             this.CancelAdd.TabIndex = 8;
@@ -211,7 +248,7 @@
             // 
             this.DeleteItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.DeleteItem.ForeColor = System.Drawing.Color.Red;
-            this.DeleteItem.Location = new System.Drawing.Point(13, 230);
+            this.DeleteItem.Location = new System.Drawing.Point(13, 258);
             this.DeleteItem.Name = "DeleteItem";
             this.DeleteItem.Size = new System.Drawing.Size(75, 23);
             this.DeleteItem.TabIndex = 9;
@@ -223,7 +260,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(395, 261);
+            this.ClientSize = new System.Drawing.Size(395, 292);
             this.Controls.Add(this.DeleteItem);
             this.Controls.Add(this.CancelAdd);
             this.Controls.Add(this.AddItem);
@@ -259,5 +296,8 @@
         private System.Windows.Forms.Button CancelAdd;
         private System.Windows.Forms.ComboBox InputAddType;
         private System.Windows.Forms.Button DeleteItem;
+        private System.Windows.Forms.CheckBox CheckAddUseCompression;
+        private System.Windows.Forms.CheckBox CheckAddUseEncryption;
+        private System.Windows.Forms.Label AddTranOpt;
     }
 }

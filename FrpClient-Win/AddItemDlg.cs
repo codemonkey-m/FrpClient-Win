@@ -20,6 +20,8 @@ namespace FrpClient_Win
             cNewItemInfo.nRemotePort = Convert.ToInt32(InputAddRemotePort.Text);
             cNewItemInfo.strDomain = InputAddDomain.Text;
             cNewItemInfo.strSectionName = InputAddSectionName.Text;
+            cNewItemInfo.strUseEncryption = CheckAddUseEncryption.Checked;
+            cNewItemInfo.strUseCompression = CheckAddUseCompression.Checked;
 
             DB.Instance().AddItem(cNewItemInfo);
             cNewItemInfo = null;
@@ -48,6 +50,8 @@ namespace FrpClient_Win
             InputAddLoaclIP.Text = cNewItemInfo.strLocalIp;
             InputAddRemotePort.Text = cNewItemInfo.nRemotePort.ToString();
             InputAddDomain.Text = cNewItemInfo.strDomain;
+            CheckAddUseEncryption.Checked = cNewItemInfo.strUseEncryption;
+            CheckAddUseCompression.Checked = cNewItemInfo.strUseCompression;
             InputAddSectionName.Text = cNewItemInfo.strSectionName;
         }
 
@@ -55,6 +59,14 @@ namespace FrpClient_Win
         {
             DB.Instance().DelItem(cNewItemInfo.strSectionName);
             Close();
+        }
+
+        private void InputAddLoaclIP_DoubleClick(object sender, EventArgs e) {
+            InputAddLoaclIP.Text = "127.0.0.1";
+        }
+
+        private void InputAddRemotePort_DoubleClick(object sender, EventArgs e) {
+            InputAddRemotePort.Text = InputAddLoaclPort.Text;
         }
     }
 }
