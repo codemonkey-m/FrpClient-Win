@@ -43,8 +43,10 @@
             this.AddItem = new System.Windows.Forms.Button();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.exit_toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AutoRun = new System.Windows.Forms.ToolStripMenuItem();
+            this.exit_toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.use_encryption = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.use_compression = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -77,7 +79,7 @@
             // 
             this.ProcOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ProcOutput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.ProcOutput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(49)))), ((int)(((byte)(52)))));
             this.ProcOutput.ForeColor = System.Drawing.SystemColors.Info;
             this.ProcOutput.Location = new System.Drawing.Point(6, 279);
             this.ProcOutput.Multiline = true;
@@ -100,7 +102,9 @@
             this.local_port,
             this.local_ip,
             this.server_port,
-            this.host});
+            this.host,
+            this.use_encryption,
+            this.use_compression});
             this.ServerList.FullRowSelect = true;
             this.ServerList.GridLines = true;
             this.ServerList.HideSelection = false;
@@ -115,7 +119,7 @@
             // 
             // name
             // 
-            this.name.Text = "别称";
+            this.name.Text = "标签";
             this.name.Width = 120;
             // 
             // type
@@ -131,7 +135,7 @@
             // local_ip
             // 
             this.local_ip.Text = "本地IP";
-            this.local_ip.Width = 150;
+            this.local_ip.Width = 120;
             // 
             // server_port
             // 
@@ -176,21 +180,29 @@
             this.AutoRun,
             this.exit_toolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(181, 70);
-            // 
-            // exit_toolStripMenuItem
-            // 
-            this.exit_toolStripMenuItem.Name = "exit_toolStripMenuItem";
-            this.exit_toolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.exit_toolStripMenuItem.Text = "退出";
-            this.exit_toolStripMenuItem.Click += new System.EventHandler(this.Exit_toolStripMenuItem_Click);
+            this.contextMenuStrip.Size = new System.Drawing.Size(125, 48);
             // 
             // AutoRun
             // 
             this.AutoRun.Name = "AutoRun";
-            this.AutoRun.Size = new System.Drawing.Size(180, 22);
+            this.AutoRun.Size = new System.Drawing.Size(124, 22);
             this.AutoRun.Text = "开机启动";
             this.AutoRun.Click += new System.EventHandler(this.AutoRun_Click);
+            // 
+            // exit_toolStripMenuItem
+            // 
+            this.exit_toolStripMenuItem.Name = "exit_toolStripMenuItem";
+            this.exit_toolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.exit_toolStripMenuItem.Text = "退出";
+            this.exit_toolStripMenuItem.Click += new System.EventHandler(this.Exit_toolStripMenuItem_Click);
+            // 
+            // use_encryption
+            // 
+            this.use_encryption.Text = "加密";
+            // 
+            // use_compression
+            // 
+            this.use_compression.Text = "压缩";
             // 
             // MainForm
             // 
@@ -231,6 +243,8 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem exit_toolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AutoRun;
+        private System.Windows.Forms.ColumnHeader use_encryption;
+        private System.Windows.Forms.ColumnHeader use_compression;
     }
 }
 

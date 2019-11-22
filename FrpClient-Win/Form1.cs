@@ -26,7 +26,6 @@ namespace FrpClient_Win
             if(e.CloseReason == CloseReason.UserClosing) {
                 e.Cancel = true;
                 this.Hide();
-                this.notifyIcon.Visible = true;
                 this.ShowInTaskbar = false;
                 return;
             }
@@ -39,12 +38,16 @@ namespace FrpClient_Win
             notifyIcon.Icon = this.Icon;
             notifyIcon.Text = this.Text;
 
-            //设置自启之后,开机启动要直接启动frp
+            //设置自启之后，开机启动要直接启动frp，并最小到托盘
             if (AutoRun.Checked)
             {
                 string[] strArgs = Environment.GetCommandLineArgs();
                 if (strArgs.Length >= 2 && strArgs[1].Equals(strAutoRun))
+                {
+                    this.Hide();
+                    this.ShowInTaskbar = false;
                     RestartService_Click(null, null);
+                }
             }
         }
 
@@ -62,6 +65,8 @@ namespace FrpClient_Win
                 item.SubItems.Add(info.strLocalIp);
                 item.SubItems.Add(info.nRemotePort.ToString());
                 item.SubItems.Add(info.strDomain);
+                item.SubItems.Add(info.strUseEncryption.ToString().ToLower());
+                item.SubItems.Add(info.strUseCompression.ToString().ToLower());
 
                 ServerList.Items.Add(item);
             }

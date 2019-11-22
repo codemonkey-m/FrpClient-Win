@@ -20,6 +20,8 @@ namespace FrpClient_Win
         public string strLocalIp = "127.0.0.1";
         public int nRemotePort = 13389;
         public string strDomain = "";
+        public bool strUseEncryption = false;
+        public bool strUseCompression = false;
         public string strSectionName = "rdp";
     }
 
@@ -45,6 +47,8 @@ namespace FrpClient_Win
         private const string strLocalIp = "local_ip";
         private const string strRemotePort = "remote_port";
         private const string strDomain = "custom_domains";
+        private const string strUseEncryption = "use_encryption";
+        private const string strUseCompression = "use_compression";
 
         public ServerInfo cServerinfo = new ServerInfo();
         public List<ItemInfo> listItems = new List<ItemInfo>();
@@ -80,6 +84,8 @@ namespace FrpClient_Win
                 cInfo.strLocalIp = GetValue(strSection, strLocalIp);
                 cInfo.nRemotePort = Convert.ToInt32(GetValue(strSection, strRemotePort));
                 cInfo.strDomain = GetValue(strSection, strDomain);
+                cInfo.strUseEncryption = Convert.ToBoolean(GetValue(strSection, strUseEncryption));
+                cInfo.strUseCompression = Convert.ToBoolean(GetValue(strSection, strUseCompression));
 
                 listItems.Add(cInfo);
             }
@@ -155,6 +161,8 @@ namespace FrpClient_Win
                 WritePrivateProfileString(info.strSectionName, strLocalIp, info.strLocalIp, strFileName);
                 WritePrivateProfileString(info.strSectionName, strRemotePort, info.nRemotePort.ToString(), strFileName);
                 WritePrivateProfileString(info.strSectionName, strDomain, info.strDomain, strFileName);
+                WritePrivateProfileString(info.strSectionName, strUseEncryption, info.strUseEncryption.ToString().ToLower(), strFileName);
+                WritePrivateProfileString(info.strSectionName, strUseCompression, info.strUseCompression.ToString().ToLower(), strFileName);
             }
 
             return true;
