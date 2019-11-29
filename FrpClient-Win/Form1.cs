@@ -109,7 +109,7 @@ namespace FrpClient_Win
         private void MyProcOutputHandler(object sendingProcess,DataReceivedEventArgs outLine)
         {
             if(!String.IsNullOrEmpty(outLine.Data)) {
-                ProcOutput.Text += outLine.Data.ToString()+"\r\n";
+                ProcOutput.AppendText(outLine.Data.ToString() + "\r\n");
                 ProcOutput.SelectionStart = ProcOutput.Text.Length;
                 ProcOutput.ScrollToCaret();
             }
@@ -171,11 +171,15 @@ namespace FrpClient_Win
                 this.Show();
                 this.Activate();
                 this.ShowInTaskbar = true;
+                ProcOutput.ScrollToCaret();
             }
         }
+
         private void Exit_toolStripMenuItem_Click(object sender, EventArgs e) {
-            CloseFrp();
-            Application.Exit();
+            if(MessageBox.Show("确定要退出吗？", "退出程序", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK){
+                CloseFrp();
+                Application.Exit();
+            }
         }
 
         private void AutoRun_Click(object sender, EventArgs e)
