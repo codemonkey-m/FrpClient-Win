@@ -35,7 +35,7 @@ namespace FrpClient_Win
         {
             InitList(true);
             UpdateStartButton();
-            notifyIcon.Icon = this.Icon;
+            //notifyIcon.Icon = this.Icon;
             notifyIcon.Text = this.Text;
 
             //设置自启之后，开机启动要直接启动frp，并最小到托盘

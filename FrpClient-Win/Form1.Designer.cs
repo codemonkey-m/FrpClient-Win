@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.RestartService = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ProcOutput = new System.Windows.Forms.TextBox();
@@ -39,14 +40,14 @@
             this.local_ip = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.server_port = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.host = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.use_encryption = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.use_compression = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ServerConfig = new System.Windows.Forms.Button();
             this.AddItem = new System.Windows.Forms.Button();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.AutoRun = new System.Windows.Forms.ToolStripMenuItem();
             this.exit_toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.use_encryption = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.use_compression = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -147,6 +148,14 @@
             this.host.Text = "域名";
             this.host.Width = 195;
             // 
+            // use_encryption
+            // 
+            this.use_encryption.Text = "加密";
+            // 
+            // use_compression
+            // 
+            this.use_compression.Text = "压缩";
+            // 
             // ServerConfig
             // 
             this.ServerConfig.Location = new System.Drawing.Point(106, 13);
@@ -170,6 +179,7 @@
             // notifyIcon
             // 
             this.notifyIcon.ContextMenuStrip = this.contextMenuStrip;
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
             this.notifyIcon.Text = "notifyIcon";
             this.notifyIcon.Visible = true;
             this.notifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon_MouseClick);
@@ -196,14 +206,6 @@
             this.exit_toolStripMenuItem.Text = "退出";
             this.exit_toolStripMenuItem.Click += new System.EventHandler(this.Exit_toolStripMenuItem_Click);
             // 
-            // use_encryption
-            // 
-            this.use_encryption.Text = "加密";
-            // 
-            // use_compression
-            // 
-            this.use_compression.Text = "压缩";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -213,6 +215,7 @@
             this.Controls.Add(this.ServerConfig);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.RestartService);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frp 客户端";
