@@ -33,6 +33,8 @@ namespace FrpClient_Win
 
         private void OnMainFormLoad(object sender, EventArgs e)
         {
+            System.IO.Directory.SetCurrentDirectory(System.Windows.Forms.Application.StartupPath);
+
             InitList(true);
             UpdateStartButton();
             //notifyIcon.Icon = this.Icon;
