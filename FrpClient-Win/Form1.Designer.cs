@@ -47,6 +47,7 @@
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.AutoRun = new System.Windows.Forms.ToolStripMenuItem();
+            this.About = new System.Windows.Forms.ToolStripMenuItem();
             this.exit_toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
@@ -188,9 +189,10 @@
             // 
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.AutoRun,
+            this.About,
             this.exit_toolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(125, 48);
+            this.contextMenuStrip.Size = new System.Drawing.Size(125, 70);
             // 
             // AutoRun
             // 
@@ -198,6 +200,13 @@
             this.AutoRun.Size = new System.Drawing.Size(124, 22);
             this.AutoRun.Text = "开机启动";
             this.AutoRun.Click += new System.EventHandler(this.AutoRun_Click);
+            // 
+            // About
+            // 
+            this.About.Name = "About";
+            this.About.Size = new System.Drawing.Size(124, 22);
+            this.About.Text = "关于";
+            this.About.Click += new System.EventHandler(this.About_Click);
             // 
             // exit_toolStripMenuItem
             // 
@@ -218,7 +227,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frp 客户端";
+            this.Text = "frp 客户端 v0.0.0.8";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.OnMainFormLoad);
             this.groupBox1.ResumeLayout(false);
@@ -248,6 +257,7 @@
         private System.Windows.Forms.ToolStripMenuItem AutoRun;
         private System.Windows.Forms.ColumnHeader use_encryption;
         private System.Windows.Forms.ColumnHeader use_compression;
+        private System.Windows.Forms.ToolStripMenuItem About;
     }
 }
 

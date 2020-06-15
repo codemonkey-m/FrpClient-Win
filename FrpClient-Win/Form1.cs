@@ -208,5 +208,11 @@ namespace FrpClient_Win
             reAutoRun.Close();
             return bRet;
         }
+
+        //关于
+        private void About_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/codemonkey-m/FrpClient-Win");
+        }
     }
 }
