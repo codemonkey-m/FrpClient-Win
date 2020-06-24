@@ -57,8 +57,10 @@ namespace FrpClient_Win
 
         private void DeleteItem_Click(object sender, System.EventArgs e)
         {
-            DB.Instance().DelItem(cNewItemInfo.strSectionName);
-            Close();
+            if(MessageBox.Show("确定要删除吗？", "删除条目", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK) {
+                DB.Instance().DelItem(cNewItemInfo.strSectionName);
+                Close();
+            }
         }
 
         private void InputAddLoaclIP_DoubleClick(object sender, EventArgs e) {
