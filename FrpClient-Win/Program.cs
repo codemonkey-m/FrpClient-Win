@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ServiceProcess;
 using System.Windows.Forms;
 
-namespace FrpClient_Win
+namespace FrpClient_Win 
 {
     static class Program
     {
@@ -12,11 +10,21 @@ namespace FrpClient_Win
         /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            if(args.Length > 0) {
+                for(int ii = 0; ii < args.Length; ii++) {
+                    if(args[ii] == "service") {
+                        ServiceBase[] ServicesToRun;
+                        ServicesToRun = new ServiceBase[] { new autorunService() };
+                        ServiceBase.Run(ServicesToRun);
+                    }
+                }
+            } else {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new MainForm());
+            }
         }
     }
 }

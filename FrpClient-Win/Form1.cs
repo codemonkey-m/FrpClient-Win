@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Security.Principal;
 using System.Windows.Forms;
 using Microsoft.Win32;
 
@@ -19,6 +20,24 @@ namespace FrpClient_Win
 
             //判断开机启动状态
             AutoRun.Checked = CheckRegExists(strRegName);
+
+            //检查是否管理员身份
+            WindowsPrincipal winPrincipal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
+            bool isAdmin = winPrincipal.IsInRole(WindowsBuiltInRole.Administrator);
+            if(isAdmin) {
+                ProcOutput.AppendText("当前启动身份：管理员" + "\r\n");
+                if(ServiceHelper.Status(strRegName).ToString() == "NotExist") {
+                    AutoRunService.Checked = RestartService2.Enabled = false;
+                } else {
+                    AutoRunService.Checked = true;
+                    ProcOutput.AppendText($"当前已注册到系统服务，状态：{ServiceHelper.Status(strRegName).ToString()}" + "\r\n");
+                }
+            } else {
+                AutoRunService.Enabled = false;
+                RestartService2.Enabled = false;
+                ProcOutput.AppendText("当前启动身份：非管理员" + "\r\n");
+            }
+            
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -234,6 +253,34 @@ namespace FrpClient_Win
         private void About_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/codemonkey-m/FrpClient-Win");
+        }
+
+        private void AutoRunService_Click(object sender, EventArgs e) {
+            if(ServiceHelper.Status(strRegName).ToString() == "NotExist") {
+                //安装
+                ServiceHelper.Install(
+                    strRegName,                                // 服务名
+                    strRegName,                             // 显示名称
+                    @"""" + Application.ExecutablePath + @""" service",      // 映像路径，可带参数，若路径有空格，需给路径（不含参数）套上双引号
+                    "Frp Windows客户端",                         // 服务描述
+                    ServiceStartType.Auto,                 // 启动类型
+                    ServiceAccount.LocalSystem,           // 运行帐户，可选，默认是LocalSystem，即至尊帐户
+                    null      // 依赖服务，要填服务名称，没有则为null或空数组，可选
+                );
+                AutoRunService.Checked = RestartService2.Enabled = true;
+                ServiceHelper.Restart(strRegName);
+                ProcOutput.AppendText("已注册到系统服务，并启动（控制台无输出）..." + "\r\n");
+            } else {
+                //卸载
+                ServiceHelper.Uninstall(strRegName);
+                AutoRunService.Checked = RestartService2.Enabled = false;
+                ProcOutput.AppendText("已删除系统服务，因系统机制，如重新注册需重启本程序..." + "\r\n");
+            }
+        }
+
+        private void RestartService2_Click(object sender, EventArgs e) {
+            ServiceHelper.Restart(strRegName);
+            ProcOutput.AppendText($"已重启系统服务，状态：{ServiceHelper.Status(strRegName).ToString()}（控制台无输出）..." + "\r\n");
         }
     }
 }

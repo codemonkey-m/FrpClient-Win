@@ -38,6 +38,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,6 +56,12 @@
     <Compile Include="AddItemDlg.Designer.cs">
       <DependentUpon>AddItemDlg.cs</DependentUpon>
     </Compile>
+    <Compile Include="autorunService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="autorunService.Designer.cs">
+      <DependentUpon>autorunService.cs</DependentUpon>
+    </Compile>
     <Compile Include="DB.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -70,6 +77,7 @@
     <Compile Include="ServerConfigDlg.Designer.cs">
       <DependentUpon>ServerConfigDlg.cs</DependentUpon>
     </Compile>
+    <Compile Include="ServiceHelper.cs" />
     <EmbeddedResource Include="AddItemDlg.resx">
       <DependentUpon>AddItemDlg.cs</DependentUpon>
     </EmbeddedResource>
@@ -102,7 +110,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="frp.ico" />
     <Content Include="R.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
