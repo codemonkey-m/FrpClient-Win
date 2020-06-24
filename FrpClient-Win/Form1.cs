@@ -33,9 +33,11 @@ namespace FrpClient_Win
 
         private void OnMainFormLoad(object sender, EventArgs e)
         {
+            System.IO.Directory.SetCurrentDirectory(System.Windows.Forms.Application.StartupPath);
+
             InitList(true);
             UpdateStartButton();
-            notifyIcon.Icon = this.Icon;
+            //notifyIcon.Icon = this.Icon;
             notifyIcon.Text = this.Text;
 
             //设置自启之后，开机启动要直接启动frp，并最小到托盘
@@ -209,6 +211,12 @@ namespace FrpClient_Win
 
             reAutoRun.Close();
             return bRet;
+        }
+
+        //关于
+        private void About_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/codemonkey-m/FrpClient-Win");
         }
     }
 }

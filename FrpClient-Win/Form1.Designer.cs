@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.RestartService = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ProcOutput = new System.Windows.Forms.TextBox();
@@ -39,14 +40,15 @@
             this.local_ip = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.server_port = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.host = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.use_encryption = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.use_compression = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ServerConfig = new System.Windows.Forms.Button();
             this.AddItem = new System.Windows.Forms.Button();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.AutoRun = new System.Windows.Forms.ToolStripMenuItem();
+            this.About = new System.Windows.Forms.ToolStripMenuItem();
             this.exit_toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.use_encryption = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.use_compression = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -147,6 +149,14 @@
             this.host.Text = "域名";
             this.host.Width = 195;
             // 
+            // use_encryption
+            // 
+            this.use_encryption.Text = "加密";
+            // 
+            // use_compression
+            // 
+            this.use_compression.Text = "压缩";
+            // 
             // ServerConfig
             // 
             this.ServerConfig.Location = new System.Drawing.Point(106, 13);
@@ -170,6 +180,7 @@
             // notifyIcon
             // 
             this.notifyIcon.ContextMenuStrip = this.contextMenuStrip;
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
             this.notifyIcon.Text = "notifyIcon";
             this.notifyIcon.Visible = true;
             this.notifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon_MouseClick);
@@ -178,9 +189,10 @@
             // 
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.AutoRun,
+            this.About,
             this.exit_toolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(125, 48);
+            this.contextMenuStrip.Size = new System.Drawing.Size(125, 70);
             // 
             // AutoRun
             // 
@@ -189,20 +201,19 @@
             this.AutoRun.Text = "开机启动";
             this.AutoRun.Click += new System.EventHandler(this.AutoRun_Click);
             // 
+            // About
+            // 
+            this.About.Name = "About";
+            this.About.Size = new System.Drawing.Size(124, 22);
+            this.About.Text = "关于";
+            this.About.Click += new System.EventHandler(this.About_Click);
+            // 
             // exit_toolStripMenuItem
             // 
             this.exit_toolStripMenuItem.Name = "exit_toolStripMenuItem";
             this.exit_toolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.exit_toolStripMenuItem.Text = "退出";
             this.exit_toolStripMenuItem.Click += new System.EventHandler(this.Exit_toolStripMenuItem_Click);
-            // 
-            // use_encryption
-            // 
-            this.use_encryption.Text = "加密";
-            // 
-            // use_compression
-            // 
-            this.use_compression.Text = "压缩";
             // 
             // MainForm
             // 
@@ -213,9 +224,10 @@
             this.Controls.Add(this.ServerConfig);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.RestartService);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frp 客户端";
+            this.Text = "frp 客户端 v0.0.0.8";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.OnMainFormLoad);
             this.groupBox1.ResumeLayout(false);
@@ -245,6 +257,7 @@
         private System.Windows.Forms.ToolStripMenuItem AutoRun;
         private System.Windows.Forms.ColumnHeader use_encryption;
         private System.Windows.Forms.ColumnHeader use_compression;
+        private System.Windows.Forms.ToolStripMenuItem About;
     }
 }
 
