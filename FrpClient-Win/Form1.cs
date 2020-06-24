@@ -35,6 +35,12 @@ namespace FrpClient_Win
         {
             System.IO.Directory.SetCurrentDirectory(System.Windows.Forms.Application.StartupPath);
 
+            // 检查同目录多开
+            if(IsDuplicateInstance()){
+                MessageBox.Show("本程序已经在运行！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Application.Exit();
+            }
+
             InitList(true);
             UpdateStartButton();
             //notifyIcon.Icon = this.Icon;
@@ -51,6 +57,17 @@ namespace FrpClient_Win
                     RestartService_Click(null, null);
                 }
             }
+        }
+
+        // 检查是否多开
+        private static bool IsDuplicateInstance() {
+            bool bCreatedNew;
+            // 允许不同目录实例
+            string name = System.Windows.Forms.Application.StartupPath;
+            name = name.Replace("\\", "/");
+            //创建Mutex互斥对象
+            System.Threading.Mutex newMutex = new System.Threading.Mutex(true, name, out bCreatedNew);
+            return !bCreatedNew;
         }
 
         private void InitList(bool bReadConfig = false)
