@@ -20,24 +20,6 @@ namespace FrpClient_Win
 
             //判断开机启动状态
             AutoRun.Checked = CheckRegExists(strRegName);
-
-            //检查是否管理员身份
-            WindowsPrincipal winPrincipal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
-            bool isAdmin = winPrincipal.IsInRole(WindowsBuiltInRole.Administrator);
-            if(isAdmin) {
-                ProcOutput.AppendText("当前启动身份：管理员" + "\r\n");
-                if(ServiceHelper.Status(strRegName).ToString() == "NotExist") {
-                    AutoRunService.Checked = RestartService2.Enabled = false;
-                } else {
-                    AutoRunService.Checked = true;
-                    ProcOutput.AppendText($"当前已注册到系统服务，状态：{ServiceHelper.Status(strRegName).ToString()}" + "\r\n");
-                }
-            } else {
-                AutoRunService.Enabled = false;
-                RestartService2.Enabled = false;
-                ProcOutput.AppendText("当前启动身份：非管理员" + "\r\n");
-            }
-            
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -58,6 +40,24 @@ namespace FrpClient_Win
             if(IsDuplicateInstance()){
                 MessageBox.Show("本程序已经在运行！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Application.Exit();
+            }
+
+            //检查是否管理员身份
+            WindowsPrincipal winPrincipal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
+            bool isAdmin = winPrincipal.IsInRole(WindowsBuiltInRole.Administrator);
+            if(isAdmin) {
+                ProcOutput.AppendText("启动身份：管理员" + "\r\n");
+                // 判断服务状态
+                if(ServiceHelper.Status(strRegName).ToString() == "NotExist") {
+                    AutoRunService.Checked = RestartService2.Enabled = false;
+                } else {
+                    AutoRunService.Checked = true;
+                    ProcOutput.AppendText($"已注册到系统服务，当前状态：{ServiceHelper.Status(strRegName).ToString()}" + "\r\n");
+                }
+            } else {
+                AutoRunService.Enabled = false;
+                RestartService2.Enabled = false;
+                ProcOutput.AppendText("启动身份：非管理员" + "\r\n");
             }
 
             InitList(true);
@@ -274,13 +274,13 @@ namespace FrpClient_Win
                 //卸载
                 ServiceHelper.Uninstall(strRegName);
                 AutoRunService.Checked = RestartService2.Enabled = false;
-                ProcOutput.AppendText("已删除系统服务，因系统机制，如重新注册需重启本程序..." + "\r\n");
+                ProcOutput.AppendText("已删除系统服务，因系统机制，如重新注册需重启本程序（或exploere.exe）..." + "\r\n");
             }
         }
 
         private void RestartService2_Click(object sender, EventArgs e) {
             ServiceHelper.Restart(strRegName);
-            ProcOutput.AppendText($"已重启系统服务，状态：{ServiceHelper.Status(strRegName).ToString()}（控制台无输出）..." + "\r\n");
+            ProcOutput.AppendText($"已重启系统服务，当前状态：{ServiceHelper.Status(strRegName).ToString()}（控制台无输出）..." + "\r\n");
         }
     }
 }

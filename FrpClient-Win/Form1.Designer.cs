@@ -48,9 +48,9 @@
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.AutoRun = new System.Windows.Forms.ToolStripMenuItem();
             this.AutoRunService = new System.Windows.Forms.ToolStripMenuItem();
+            this.RestartService2 = new System.Windows.Forms.ToolStripMenuItem();
             this.About = new System.Windows.Forms.ToolStripMenuItem();
             this.exit_toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.RestartService2 = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -204,14 +204,23 @@
             this.AutoRun.Name = "AutoRun";
             this.AutoRun.Size = new System.Drawing.Size(180, 22);
             this.AutoRun.Text = "开机启动";
+            this.AutoRun.ToolTipText = "需用户登录后自启";
             this.AutoRun.Click += new System.EventHandler(this.AutoRun_Click);
             // 
             // AutoRunService
             // 
             this.AutoRunService.Name = "AutoRunService";
-            this.AutoRunService.Size = new System.Drawing.Size(208, 22);
-            this.AutoRunService.Text = "注册系统服务（管理员）";
+            this.AutoRunService.Size = new System.Drawing.Size(220, 22);
+            this.AutoRunService.Text = "注册到系统服务（管理员）";
+            this.AutoRunService.ToolTipText = "无需用户登录，真正随系统自启";
             this.AutoRunService.Click += new System.EventHandler(this.AutoRunService_Click);
+            // 
+            // RestartService2
+            // 
+            this.RestartService2.Name = "RestartService2";
+            this.RestartService2.Size = new System.Drawing.Size(220, 22);
+            this.RestartService2.Text = "重启系统服务";
+            this.RestartService2.Click += new System.EventHandler(this.RestartService2_Click);
             // 
             // About
             // 
@@ -226,13 +235,6 @@
             this.exit_toolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exit_toolStripMenuItem.Text = "退出";
             this.exit_toolStripMenuItem.Click += new System.EventHandler(this.Exit_toolStripMenuItem_Click);
-            // 
-            // RestartService2
-            // 
-            this.RestartService2.Name = "RestartService2";
-            this.RestartService2.Size = new System.Drawing.Size(208, 22);
-            this.RestartService2.Text = "重启系统服务";
-            this.RestartService2.Click += new System.EventHandler(this.RestartService2_Click);
             // 
             // MainForm
             // 

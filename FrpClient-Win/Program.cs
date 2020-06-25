@@ -12,14 +12,10 @@ namespace FrpClient_Win
         [STAThread]
         static void Main(string[] args)
         {
-            if(args.Length > 0) {
-                for(int ii = 0; ii < args.Length; ii++) {
-                    if(args[ii] == "service") {
-                        ServiceBase[] ServicesToRun;
-                        ServicesToRun = new ServiceBase[] { new autorunService() };
-                        ServiceBase.Run(ServicesToRun);
-                    }
-                }
+            if(args.Length > 0 && args[0] == "service") {
+                ServiceBase[] ServicesToRun;
+                ServicesToRun = new ServiceBase[] { new autorunService() };
+                ServiceBase.Run(ServicesToRun);
             } else {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
