@@ -144,7 +144,7 @@ namespace FrpClient_Win
             UpdateStartButton();
         }
 
-        private void MyProcOutputHandler(object sendingProcess,DataReceivedEventArgs outLine)
+        private void MyProcOutputHandler(object sendingProcess, DataReceivedEventArgs outLine)
         {
             if(!String.IsNullOrEmpty(outLine.Data)) {
                 ProcOutput.AppendText(outLine.Data.ToString() + "\r\n");
