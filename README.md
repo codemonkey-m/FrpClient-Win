@@ -1,10 +1,43 @@
-# Frp Windows客户端,仅在win10下测试.  
-  
-__frp项目地址  https://github.com/fatedier/frp__  
-    
-__@Cp0204__
-> 可注册到系统服务（需管理员权限运行开启，实现免登录自启）
+# FrpClient-Win
+[![License](https://img.shields.io/badge/license-ANTI996-green.svg)](https://github.com/codemonkey-m/FrpClient-Win/blob/master/LICENSE)
+[![Lastest Release](https://img.shields.io/github/release/codemonkey-m/FrpClient-Win/all.svg)](https://github.com/codemonkey-m/FrpClient-Win/releases)
+
+[frpc](https://github.com/fatedier/frp) 的 Windows GUI 客户端，图形化配置 frpc，以及支持开机启动，仅在 Win10 下测试。  
 
 
+## 使用
 
-![截图](https://github.com/codemonkey-m/FrpClient-Win/blob/master/FrpClient-Win/res/TIM%E6%88%AA%E5%9B%BE20200323121203.png)
+### 目录结构
+```
+.  
+├── FrpClient-Win.exe	// 主程序  
+├── frpc.exe		// 开发环境  
+├── config.ini		// 配置  
+└── autoService.log	// 服务自启日志  
+```
+
+### 开机启动
+支持两种方式开机启动，两种方式选其一即可，当以服务方式启动时，GUI可退出。  
+
+#### 普通自启
+1. Windows 用户登录时，将以 `./FrpClient-Win.exe autorun` 自启。
+2. 默认打开 frpc.exe 并最小化到任务栏。  
+
+#### 服务自启
+1. 当使用管理员权限运行 GUI 时，可注册到系统服务，实现免 Windows 用户登录时自启。  
+2. 服务自启时，日志写入到 `./autoService.log`，未做自动清理，需手动删除。  
+3. 你可以通过 此电脑 - 管理 - 服务和应用程序 - 服务，找到 **FrpClient** 项目进行管理。  
+4. **如需删除本程序，请先在程序中取消服务自启。**  
+
+### 一些技巧
+* 服务器配置中填入用户标识符，可避免与他人标签冲突。  
+* 编辑条目时，双击本地IP，填入 127.0.0.1。  
+* 编辑条目时，双击远程端口，填入 =本地端口。  
+
+## 截图
+![主界面](./FrpClient-Win/res/screenshot.gif)
+
+
+## 贡献者
+* @codemonkey-m  
+* @Cp0204  
