@@ -35,6 +35,7 @@ namespace FrpClient_Win
         private void OnMainFormLoad(object sender, EventArgs e)
         {
             System.IO.Directory.SetCurrentDirectory(System.Windows.Forms.Application.StartupPath);
+            this.Text = this.Text + " - v" + Application.ProductVersion.ToString();
 
             // 检查同目录多开
             if(IsDuplicateInstance()){
