@@ -3,6 +3,7 @@
 [![Lastest Release](https://img.shields.io/github/release/codemonkey-m/FrpClient-Win/all.svg)](https://github.com/codemonkey-m/FrpClient-Win/releases)
 
 [frpc](https://github.com/fatedier/frp) 的 Windows GUI 客户端，图形化配置 frpc，以及支持开机启动，仅在 Win10 下测试。  
+当前release附带frpc版本为0.33.0
 
 
 ## 使用
