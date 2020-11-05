@@ -32,7 +32,7 @@
 * 服务器配置中填入用户标识符，可避免与他人标签冲突  
 * 编辑条目时，双击本地IP框，填入 127.0.0.1。  
 * 编辑条目时，双击远程端口框，填入 =本地端口。  
-* 支持[范围端口映射](https://gofrp.org/docs/features/common/range/)，端口格式如：80-88;440。  
+* 支持[范围端口映射](https://gofrp.org/docs/features/common/range/)，端口格式如：80-88;443。  
 
 ## 截图
 ![主界面](./FrpClient-Win/res/screenshot.gif)

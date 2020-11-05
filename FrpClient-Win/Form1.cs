@@ -50,14 +50,13 @@ namespace FrpClient_Win
                 ProcOutput.AppendText("启动身份：管理员" + "\r\n");
                 // 判断服务状态
                 if(ServiceHelper.Status(strRegName).ToString() == "NotExist") {
-                    AutoRunService.Checked = RestartSysService.Enabled = false;
+                    AutoSysService.Checked = RestartSysService.Enabled = StopSysService.Enabled = false;
                 } else {
-                    AutoRunService.Checked = true;
+                    AutoSysService.Checked = true;
                     ProcOutput.AppendText($"已注册到系统服务，当前状态：{ServiceHelper.Status(strRegName).ToString()}" + "\r\n");
                 }
             } else {
-                AutoRunService.Enabled = false;
-                RestartSysService.Enabled = false;
+                AutoSysService.Enabled = RestartSysService.Enabled = StopSysService.Enabled = false;
                 ProcOutput.AppendText("启动身份：非管理员" + "\r\n");
             }
 
@@ -262,7 +261,7 @@ namespace FrpClient_Win
             System.Diagnostics.Process.Start("https://github.com/codemonkey-m/FrpClient-Win");
         }
 
-        private void AutoRunService_Click(object sender, EventArgs e) {
+        private void AutoSysService_Click(object sender, EventArgs e) {
             if(ServiceHelper.Status(strRegName).ToString() == "NotExist") {
                 //安装
                 ServiceHelper.Install(
@@ -274,13 +273,13 @@ namespace FrpClient_Win
                     ServiceAccount.LocalSystem,           // 运行帐户，可选，默认是LocalSystem，即至尊帐户
                     null      // 依赖服务，要填服务名称，没有则为null或空数组，可选
                 );
-                AutoRunService.Checked = RestartSysService.Enabled = true;
+                AutoSysService.Checked = RestartSysService.Enabled = StopSysService.Enabled = true;
                 ServiceHelper.Restart(strRegName);
                 ProcOutput.AppendText("已注册到系统服务，并启动（控制台无输出）..." + "\r\n");
             } else {
                 //卸载
                 ServiceHelper.Uninstall(strRegName);
-                AutoRunService.Checked = RestartSysService.Enabled = false;
+                AutoSysService.Checked = RestartSysService.Enabled = StopSysService.Enabled = false;
                 ProcOutput.AppendText("已删除系统服务，因系统机制，如重新注册需重启本程序（或exploere.exe）..." + "\r\n");
             }
         }
