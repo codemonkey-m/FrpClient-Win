@@ -3,16 +3,14 @@
 [![Lastest Release](https://img.shields.io/github/release/codemonkey-m/FrpClient-Win/all.svg)](https://github.com/codemonkey-m/FrpClient-Win/releases)
 
 [frpc](https://github.com/fatedier/frp) 的 Windows GUI 客户端，图形化配置 frpc，以及支持开机启动，仅在 Win10 下测试。  
-当前release附带frpc版本为0.33.0
-
 
 ## 使用
 
 ### 目录结构
 ```
 .  
-├── FrpClient-Win.exe	// 主程序  
-├── frpc.exe		// 开发环境  
+├── FrpClient-Win.exe	// GUI主程序  
+├── frpc.exe		// frpc  
 ├── config.ini		// 配置  
 └── autoService.log	// 服务自启日志  
 ```
@@ -31,9 +29,10 @@
 4. **如需删除本程序，请先在程序中取消服务自启。**  
 
 ### 一些技巧
-* 服务器配置中填入用户标识符，可避免与他人标签冲突。  
-* 编辑条目时，双击本地IP，填入 127.0.0.1。  
-* 编辑条目时，双击远程端口，填入 =本地端口。  
+* 服务器配置中填入用户标识符，可避免与他人标签冲突  
+* 编辑条目时，双击本地IP框，填入 127.0.0.1。  
+* 编辑条目时，双击远程端口框，填入 =本地端口。  
+* 支持[范围端口映射](https://gofrp.org/docs/features/common/range/)，端口格式如：80-88;440。  
 
 ## 截图
 ![主界面](./FrpClient-Win/res/screenshot.gif)

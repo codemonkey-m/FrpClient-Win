@@ -16,9 +16,9 @@ namespace FrpClient_Win
     class ItemInfo
     {
         public string strType = "tcp";
-        public int nLocalPort = 3389;
+        public string nLocalPort = "3389";
         public string strLocalIp = "127.0.0.1";
-        public int nRemotePort = 13389;
+        public string nRemotePort = "13389";
         public string strDomain = "";
         public bool strUseEncryption = false;
         public bool strUseCompression = false;
@@ -80,9 +80,9 @@ namespace FrpClient_Win
                 ItemInfo cInfo = new ItemInfo();
                 cInfo.strSectionName = strSection;
                 cInfo.strType = GetValue(strSection, strFrpType);
-                cInfo.nLocalPort = Convert.ToInt32(GetValue(strSection, strLocalPort));
+                cInfo.nLocalPort = GetValue(strSection, strLocalPort);
                 cInfo.strLocalIp = GetValue(strSection, strLocalIp);
-                cInfo.nRemotePort = Convert.ToInt32(GetValue(strSection, strRemotePort));
+                cInfo.nRemotePort = GetValue(strSection, strRemotePort);
                 cInfo.strDomain = GetValue(strSection, strDomain);
                 cInfo.strUseEncryption = Convert.ToBoolean(GetValue(strSection, strUseEncryption));
                 cInfo.strUseCompression = Convert.ToBoolean(GetValue(strSection, strUseCompression));

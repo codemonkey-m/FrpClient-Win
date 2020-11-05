@@ -48,10 +48,11 @@
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.AutoRun = new System.Windows.Forms.ToolStripMenuItem();
             this.AutoRunService = new System.Windows.Forms.ToolStripMenuItem();
-            this.RestartService2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.RestartSysService = new System.Windows.Forms.ToolStripMenuItem();
             this.About = new System.Windows.Forms.ToolStripMenuItem();
-            this.exit_toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.exit_toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.StopSysService = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -130,12 +131,11 @@
             // type
             // 
             this.type.Text = "类型";
-            this.type.Width = 64;
             // 
             // local_port
             // 
             this.local_port.Text = "本地端口";
-            this.local_port.Width = 62;
+            this.local_port.Width = 80;
             // 
             // local_ip
             // 
@@ -145,12 +145,12 @@
             // server_port
             // 
             this.server_port.Text = "远程端口";
-            this.server_port.Width = 68;
+            this.server_port.Width = 80;
             // 
             // host
             // 
             this.host.Text = "域名";
-            this.host.Width = 195;
+            this.host.Width = 180;
             // 
             // use_encryption
             // 
@@ -202,7 +202,8 @@
             // 
             this.AutoRun.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.AutoRunService,
-            this.RestartService2});
+            this.RestartSysService,
+            this.StopSysService});
             this.AutoRun.Name = "AutoRun";
             this.AutoRun.Size = new System.Drawing.Size(180, 22);
             this.AutoRun.Text = "开机启动";
@@ -217,12 +218,12 @@
             this.AutoRunService.ToolTipText = "无需用户登录，真正随系统自启";
             this.AutoRunService.Click += new System.EventHandler(this.AutoRunService_Click);
             // 
-            // RestartService2
+            // RestartSysService
             // 
-            this.RestartService2.Name = "RestartService2";
-            this.RestartService2.Size = new System.Drawing.Size(220, 22);
-            this.RestartService2.Text = "重启系统服务";
-            this.RestartService2.Click += new System.EventHandler(this.RestartService2_Click);
+            this.RestartSysService.Name = "RestartSysService";
+            this.RestartSysService.Size = new System.Drawing.Size(220, 22);
+            this.RestartSysService.Text = "重启系统服务";
+            this.RestartSysService.Click += new System.EventHandler(this.RestartSysService_Click);
             // 
             // About
             // 
@@ -231,6 +232,11 @@
             this.About.Text = "关于";
             this.About.Click += new System.EventHandler(this.About_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            // 
             // exit_toolStripMenuItem
             // 
             this.exit_toolStripMenuItem.Name = "exit_toolStripMenuItem";
@@ -238,10 +244,12 @@
             this.exit_toolStripMenuItem.Text = "退出";
             this.exit_toolStripMenuItem.Click += new System.EventHandler(this.Exit_toolStripMenuItem_Click);
             // 
-            // toolStripSeparator1
+            // StopSysService
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.StopSysService.Name = "StopSysService";
+            this.StopSysService.Size = new System.Drawing.Size(220, 22);
+            this.StopSysService.Text = "停止系统服务";
+            this.StopSysService.Click += new System.EventHandler(this.StopSysService_Click);
             // 
             // MainForm
             // 
@@ -287,8 +295,9 @@
         private System.Windows.Forms.ColumnHeader use_compression;
         private System.Windows.Forms.ToolStripMenuItem About;
         private System.Windows.Forms.ToolStripMenuItem AutoRunService;
-        private System.Windows.Forms.ToolStripMenuItem RestartService2;
+        private System.Windows.Forms.ToolStripMenuItem RestartSysService;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem StopSysService;
     }
 }
 

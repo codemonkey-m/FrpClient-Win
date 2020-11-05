@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.AddType = new System.Windows.Forms.Label();
             this.AddLoaclPort = new System.Windows.Forms.Label();
             this.AddLoaclIP = new System.Windows.Forms.Label();
@@ -47,6 +48,7 @@
             this.AddItem = new System.Windows.Forms.Button();
             this.CancelAdd = new System.Windows.Forms.Button();
             this.DeleteItem = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -183,6 +185,7 @@
             this.InputAddSectionName.Name = "InputAddSectionName";
             this.InputAddSectionName.Size = new System.Drawing.Size(231, 21);
             this.InputAddSectionName.TabIndex = 5;
+            this.toolTip1.SetToolTip(this.InputAddSectionName, "当端口为范围格式时，将自动补全 range:");
             // 
             // InputAddDomain
             // 
@@ -201,6 +204,7 @@
             this.InputAddRemotePort.Name = "InputAddRemotePort";
             this.InputAddRemotePort.Size = new System.Drawing.Size(231, 21);
             this.InputAddRemotePort.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.InputAddRemotePort, "双击填入“本地端口”内容");
             this.InputAddRemotePort.DoubleClick += new System.EventHandler(this.InputAddRemotePort_DoubleClick);
             // 
             // InputAddLoaclIP
@@ -211,6 +215,7 @@
             this.InputAddLoaclIP.Name = "InputAddLoaclIP";
             this.InputAddLoaclIP.Size = new System.Drawing.Size(231, 21);
             this.InputAddLoaclIP.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.InputAddLoaclIP, "双击填入 127.0.0.1");
             this.InputAddLoaclIP.DoubleClick += new System.EventHandler(this.InputAddLoaclIP_DoubleClick);
             // 
             // InputAddLoaclPort
@@ -221,6 +226,7 @@
             this.InputAddLoaclPort.Name = "InputAddLoaclPort";
             this.InputAddLoaclPort.Size = new System.Drawing.Size(231, 21);
             this.InputAddLoaclPort.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.InputAddLoaclPort, "支持范围端口格式如：80-88,443");
             // 
             // AddItem
             // 
@@ -255,6 +261,13 @@
             this.DeleteItem.Text = "删除";
             this.DeleteItem.UseVisualStyleBackColor = true;
             this.DeleteItem.Click += new System.EventHandler(this.DeleteItem_Click);
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.AutomaticDelay = 100;
+            this.toolTip1.AutoPopDelay = 5000;
+            this.toolTip1.InitialDelay = 100;
+            this.toolTip1.ReshowDelay = 20;
             // 
             // AddItemDlg
             // 
@@ -299,5 +312,6 @@
         private System.Windows.Forms.CheckBox CheckAddUseCompression;
         private System.Windows.Forms.CheckBox CheckAddUseEncryption;
         private System.Windows.Forms.Label AddTranOpt;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
