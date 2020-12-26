@@ -166,7 +166,7 @@
             this.ServerConfig.Name = "ServerConfig";
             this.ServerConfig.Size = new System.Drawing.Size(82, 40);
             this.ServerConfig.TabIndex = 1;
-            this.ServerConfig.Text = "服务器配置";
+            this.ServerConfig.Text = "服务配置";
             this.ServerConfig.UseVisualStyleBackColor = true;
             this.ServerConfig.Click += new System.EventHandler(this.ServerConfig_Click);
             // 

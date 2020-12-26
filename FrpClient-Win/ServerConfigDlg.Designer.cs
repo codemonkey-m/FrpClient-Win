@@ -39,13 +39,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.FrpAdmin = new System.Windows.Forms.CheckBox();
+            this.FrpAdminPort = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // SaveServerConfig
             // 
             this.SaveServerConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.SaveServerConfig.Location = new System.Drawing.Point(174, 174);
+            this.SaveServerConfig.Location = new System.Drawing.Point(174, 217);
             this.SaveServerConfig.Name = "SaveServerConfig";
             this.SaveServerConfig.Size = new System.Drawing.Size(75, 23);
             this.SaveServerConfig.TabIndex = 0;
@@ -56,7 +58,7 @@
             // CancelConfig
             // 
             this.CancelConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.CancelConfig.Location = new System.Drawing.Point(261, 174);
+            this.CancelConfig.Location = new System.Drawing.Point(261, 217);
             this.CancelConfig.Name = "CancelConfig";
             this.CancelConfig.Size = new System.Drawing.Size(75, 23);
             this.CancelConfig.TabIndex = 1;
@@ -69,6 +71,8 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.FrpAdminPort);
+            this.groupBox1.Controls.Add(this.FrpAdmin);
             this.groupBox1.Controls.Add(this.FrpUser);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.FrpToken);
@@ -79,16 +83,16 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(13, 9);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(323, 155);
+            this.groupBox1.Size = new System.Drawing.Size(323, 198);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "服务器数据";
+            this.groupBox1.Text = "通用参数";
             // 
             // FrpUser
             // 
             this.FrpUser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.FrpUser.Location = new System.Drawing.Point(114, 118);
+            this.FrpUser.Location = new System.Drawing.Point(118, 126);
             this.FrpUser.Name = "FrpUser";
             this.FrpUser.Size = new System.Drawing.Size(183, 21);
             this.FrpUser.TabIndex = 7;
@@ -96,7 +100,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(18, 121);
+            this.label4.Location = new System.Drawing.Point(22, 130);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 12);
             this.label4.TabIndex = 6;
@@ -106,7 +110,7 @@
             // 
             this.FrpToken.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.FrpToken.Location = new System.Drawing.Point(114, 87);
+            this.FrpToken.Location = new System.Drawing.Point(118, 95);
             this.FrpToken.Name = "FrpToken";
             this.FrpToken.Size = new System.Drawing.Size(183, 21);
             this.FrpToken.TabIndex = 5;
@@ -115,7 +119,7 @@
             // 
             this.FrpServerPort.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.FrpServerPort.Location = new System.Drawing.Point(114, 54);
+            this.FrpServerPort.Location = new System.Drawing.Point(118, 62);
             this.FrpServerPort.Name = "FrpServerPort";
             this.FrpServerPort.Size = new System.Drawing.Size(183, 21);
             this.FrpServerPort.TabIndex = 4;
@@ -124,7 +128,7 @@
             // 
             this.FrpServerIp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.FrpServerIp.Location = new System.Drawing.Point(114, 21);
+            this.FrpServerIp.Location = new System.Drawing.Point(118, 29);
             this.FrpServerIp.Name = "FrpServerIp";
             this.FrpServerIp.Size = new System.Drawing.Size(183, 21);
             this.FrpServerIp.TabIndex = 3;
@@ -132,7 +136,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 90);
+            this.label3.Location = new System.Drawing.Point(23, 99);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 12);
             this.label3.TabIndex = 2;
@@ -141,7 +145,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 57);
+            this.label2.Location = new System.Drawing.Point(23, 66);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(71, 12);
             this.label2.TabIndex = 1;
@@ -150,17 +154,39 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 24);
+            this.label1.Location = new System.Drawing.Point(23, 33);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "frp服务器IP";
             // 
+            // FrpAdmin
+            // 
+            this.FrpAdmin.AutoSize = true;
+            this.FrpAdmin.Location = new System.Drawing.Point(24, 161);
+            this.FrpAdmin.Name = "FrpAdmin";
+            this.FrpAdmin.Size = new System.Drawing.Size(204, 16);
+            this.FrpAdmin.TabIndex = 8;
+            this.FrpAdmin.Text = "开启客户端面板（热加载），端口";
+            this.FrpAdmin.UseVisualStyleBackColor = true;
+            this.FrpAdmin.CheckedChanged += new System.EventHandler(this.FrpAdmin_CheckedChanged);
+            // 
+            // FrpAdminPort
+            // 
+            this.FrpAdminPort.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.FrpAdminPort.Enabled = false;
+            this.FrpAdminPort.Location = new System.Drawing.Point(234, 157);
+            this.FrpAdminPort.Name = "FrpAdminPort";
+            this.FrpAdminPort.Size = new System.Drawing.Size(67, 21);
+            this.FrpAdminPort.TabIndex = 9;
+            this.FrpAdminPort.Text = "7400";
+            // 
             // ServerConfigDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(348, 206);
+            this.ClientSize = new System.Drawing.Size(348, 249);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.CancelConfig);
             this.Controls.Add(this.SaveServerConfig);
@@ -169,7 +195,7 @@
             this.MinimizeBox = false;
             this.Name = "ServerConfigDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "服务器配置";
+            this.Text = "服务配置";
             this.Load += new System.EventHandler(this.OnConfigDlgLoad);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -190,5 +216,7 @@
         private System.Windows.Forms.TextBox FrpServerIp;
         private System.Windows.Forms.TextBox FrpUser;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox FrpAdmin;
+        private System.Windows.Forms.TextBox FrpAdminPort;
     }
 }

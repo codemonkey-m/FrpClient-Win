@@ -181,6 +181,7 @@
             // 
             this.InputAddSectionName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.InputAddSectionName.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.InputAddSectionName.Location = new System.Drawing.Point(116, 177);
             this.InputAddSectionName.Name = "InputAddSectionName";
             this.InputAddSectionName.Size = new System.Drawing.Size(231, 21);

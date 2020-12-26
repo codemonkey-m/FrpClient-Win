@@ -10,6 +10,7 @@ namespace FrpClient_Win
     {
         Process frp_process = null;
         bool bStatus = false;
+        bool sStatus = false;
         const string strRegName = "FrpClient";
         const string strAutoRun = "autorun";
 
@@ -54,6 +55,8 @@ namespace FrpClient_Win
                 } else {
                     AutoSysService.Checked = true;
                     ProcOutput.AppendText($"已注册到系统服务，当前状态：{ServiceHelper.Status(strRegName).ToString()}" + "\r\n");
+                    if(ServiceHelper.Status(strRegName).ToString() == "Running")
+                        sStatus = true;
                 }
             } else {
                 AutoSysService.Enabled = RestartSysService.Enabled = StopSysService.Enabled = false;
@@ -113,8 +116,15 @@ namespace FrpClient_Win
         private void RestartService_Click(object sender, EventArgs e)
         {
             if(bStatus) {
-                CloseFrp();
-                return;
+                DialogResult result = MessageBox.Show("停止后，是否立即重新启动？", "停止服务", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if(result == DialogResult.Cancel) {
+                    return;
+                } else if(result == DialogResult.Yes) {
+                    CloseFrp();
+                }else if(result == DialogResult.No) {
+                    CloseFrp();
+                    return;
+                }
             }
             if (!System.IO.File.Exists(DB.strFileName))
             {
@@ -169,6 +179,21 @@ namespace FrpClient_Win
             UpdateStartButton();
         }
 
+        private void ReloadFrp() {
+            if(DB.Instance().cServerinfo.nAdminPort>0 && (bStatus || sStatus)) {
+                Process frp_reload = new Process();
+                frp_reload.StartInfo.FileName = "frpc.exe";
+                frp_reload.StartInfo.Arguments = " reload -c " + DB.strFileName;
+                frp_reload.StartInfo.CreateNoWindow = true;
+                frp_reload.StartInfo.RedirectStandardOutput = true;
+                frp_reload.OutputDataReceived += new DataReceivedEventHandler(MyProcOutputHandler);
+                frp_reload.StartInfo.UseShellExecute = false;
+                frp_reload.Start();
+                frp_reload.BeginOutputReadLine();
+                ProcOutput.AppendText("热加载配置文件..." + "\r\n");
+            }
+        }
+
         private void OnFrpExit(Object sender, EventArgs e)
         {
             frp_process = null;
@@ -190,6 +215,7 @@ namespace FrpClient_Win
 
             //关闭之后刷新界面
             InitList();
+            ReloadFrp();
         }
 
         private void AddItem_Click(object sender, EventArgs e)
@@ -287,11 +313,13 @@ namespace FrpClient_Win
         private void RestartSysService_Click(object sender, EventArgs e) {
             ServiceHelper.Restart(strRegName);
             ProcOutput.AppendText($"已重启系统服务，当前状态：{ServiceHelper.Status(strRegName).ToString()}（控制台无输出）..." + "\r\n");
+            sStatus = true;
         }
 
         private void StopSysService_Click(object sender, EventArgs e) {
             ServiceHelper.Restart(strRegName, false);
             ProcOutput.AppendText($"已停止系统服务，当前状态：{ServiceHelper.Status(strRegName).ToString()}（控制台无输出）..." + "\r\n");
+            sStatus = false;
         }
     }
 }
