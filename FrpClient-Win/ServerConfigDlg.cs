@@ -22,6 +22,7 @@ namespace FrpClient_Win
             DB.Instance().cServerinfo.nPort = Convert.ToInt32(FrpServerPort.Text);
             DB.Instance().cServerinfo.strToken = FrpToken.Text;
             DB.Instance().cServerinfo.strUser = FrpUser.Text;
+            DB.Instance().cServerinfo.nAdminPort = Convert.ToInt32(FrpAdminPort.Text);
 
             DB.Instance().SaveConfig();
             Close();
@@ -34,6 +35,15 @@ namespace FrpClient_Win
             FrpServerPort.Text = DB.Instance().cServerinfo.nPort.ToString();
             FrpToken.Text = DB.Instance().cServerinfo.strToken;
             FrpUser.Text = DB.Instance().cServerinfo.strUser;
+            FrpAdminPort.Text = DB.Instance().cServerinfo.nAdminPort.ToString();
+            if(DB.Instance().cServerinfo.nAdminPort > 0) {
+                FrpAdminPort.Enabled = FrpAdmin.Checked = true;
+            }
+        }
+
+        private void FrpAdmin_CheckedChanged(object sender, EventArgs e) {
+            FrpAdminPort.Enabled = FrpAdmin.Checked;
+            FrpAdminPort.Text = FrpAdmin.Checked ? "7400" : "0";
         }
     }
 }

@@ -10,6 +10,7 @@ namespace FrpClient_Win
     {
         Process frp_process = null;
         bool bStatus = false;
+        bool sStatus = false;
         const string strRegName = "FrpClient";
         const string strAutoRun = "autorun";
 
@@ -50,14 +51,15 @@ namespace FrpClient_Win
                 ProcOutput.AppendText("启动身份：管理员" + "\r\n");
                 // 判断服务状态
                 if(ServiceHelper.Status(strRegName).ToString() == "NotExist") {
-                    AutoRunService.Checked = RestartService2.Enabled = false;
+                    AutoSysService.Checked = RestartSysService.Enabled = StopSysService.Enabled = false;
                 } else {
-                    AutoRunService.Checked = true;
+                    AutoSysService.Checked = true;
                     ProcOutput.AppendText($"已注册到系统服务，当前状态：{ServiceHelper.Status(strRegName).ToString()}" + "\r\n");
+                    if(ServiceHelper.Status(strRegName).ToString() == "Running")
+                        sStatus = true;
                 }
             } else {
-                AutoRunService.Enabled = false;
-                RestartService2.Enabled = false;
+                AutoSysService.Enabled = RestartSysService.Enabled = StopSysService.Enabled = false;
                 ProcOutput.AppendText("启动身份：非管理员" + "\r\n");
             }
 
@@ -113,8 +115,17 @@ namespace FrpClient_Win
 
         private void RestartService_Click(object sender, EventArgs e)
         {
-            CloseFrp();
-
+            if(bStatus) {
+                DialogResult result = MessageBox.Show("停止后，是否立即重新启动？", "停止服务", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if(result == DialogResult.Cancel) {
+                    return;
+                } else if(result == DialogResult.Yes) {
+                    CloseFrp();
+                }else if(result == DialogResult.No) {
+                    CloseFrp();
+                    return;
+                }
+            }
             if (!System.IO.File.Exists(DB.strFileName))
             {
                 MessageBox.Show("未配置服务器，无法启动。");
@@ -162,6 +173,25 @@ namespace FrpClient_Win
             frp_process.Kill();
             frp_process.Close();
             frp_process = null;
+
+            ProcOutput.AppendText("停止服务..." + "\r\n");
+            bStatus = false;
+            UpdateStartButton();
+        }
+
+        private void ReloadFrp() {
+            if(DB.Instance().cServerinfo.nAdminPort>0 && (bStatus || sStatus)) {
+                Process frp_reload = new Process();
+                frp_reload.StartInfo.FileName = "frpc.exe";
+                frp_reload.StartInfo.Arguments = " reload -c " + DB.strFileName;
+                frp_reload.StartInfo.CreateNoWindow = true;
+                frp_reload.StartInfo.RedirectStandardOutput = true;
+                frp_reload.OutputDataReceived += new DataReceivedEventHandler(MyProcOutputHandler);
+                frp_reload.StartInfo.UseShellExecute = false;
+                frp_reload.Start();
+                frp_reload.BeginOutputReadLine();
+                ProcOutput.AppendText("热加载配置文件..." + "\r\n");
+            }
         }
 
         private void OnFrpExit(Object sender, EventArgs e)
@@ -185,6 +215,7 @@ namespace FrpClient_Win
 
             //关闭之后刷新界面
             InitList();
+            ReloadFrp();
         }
 
         private void AddItem_Click(object sender, EventArgs e)
@@ -199,7 +230,7 @@ namespace FrpClient_Win
         private void UpdateStartButton()
         {
             if(bStatus)
-                RestartService.Text = "重启服务";
+                RestartService.Text = "停止服务";
             else
                 RestartService.Text = "启动服务";
 
@@ -256,7 +287,7 @@ namespace FrpClient_Win
             System.Diagnostics.Process.Start("https://github.com/codemonkey-m/FrpClient-Win");
         }
 
-        private void AutoRunService_Click(object sender, EventArgs e) {
+        private void AutoSysService_Click(object sender, EventArgs e) {
             if(ServiceHelper.Status(strRegName).ToString() == "NotExist") {
                 //安装
                 ServiceHelper.Install(
@@ -268,20 +299,27 @@ namespace FrpClient_Win
                     ServiceAccount.LocalSystem,           // 运行帐户，可选，默认是LocalSystem，即至尊帐户
                     null      // 依赖服务，要填服务名称，没有则为null或空数组，可选
                 );
-                AutoRunService.Checked = RestartService2.Enabled = true;
+                AutoSysService.Checked = RestartSysService.Enabled = StopSysService.Enabled = true;
                 ServiceHelper.Restart(strRegName);
                 ProcOutput.AppendText("已注册到系统服务，并启动（控制台无输出）..." + "\r\n");
             } else {
                 //卸载
                 ServiceHelper.Uninstall(strRegName);
-                AutoRunService.Checked = RestartService2.Enabled = false;
+                AutoSysService.Checked = RestartSysService.Enabled = StopSysService.Enabled = false;
                 ProcOutput.AppendText("已删除系统服务，因系统机制，如重新注册需重启本程序（或exploere.exe）..." + "\r\n");
             }
         }
 
-        private void RestartService2_Click(object sender, EventArgs e) {
+        private void RestartSysService_Click(object sender, EventArgs e) {
             ServiceHelper.Restart(strRegName);
             ProcOutput.AppendText($"已重启系统服务，当前状态：{ServiceHelper.Status(strRegName).ToString()}（控制台无输出）..." + "\r\n");
+            sStatus = true;
+        }
+
+        private void StopSysService_Click(object sender, EventArgs e) {
+            ServiceHelper.Restart(strRegName, false);
+            ProcOutput.AppendText($"已停止系统服务，当前状态：{ServiceHelper.Status(strRegName).ToString()}（控制台无输出）..." + "\r\n");
+            sStatus = false;
         }
     }
 }

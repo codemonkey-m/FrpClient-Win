@@ -136,14 +136,16 @@ namespace FrpClient_Win {
         /// 重启服务
         /// </summary>
         /// <param name="serviceName">服务名</param>
-        public static void Restart(string serviceName) {
+        public static void Restart(string serviceName, bool Run=true) {
             ServiceController sc = new ServiceController();
             sc.ServiceName = serviceName;
-            if(sc.Status == ServiceControllerStatus.Running) 
+            if(sc.Status == ServiceControllerStatus.Running)
                 sc.Stop();
             sc.WaitForStatus(ServiceControllerStatus.Stopped);
-            sc.Start();
-            sc.WaitForStatus(ServiceControllerStatus.Running);
+            if(Run) {
+                sc.Start();
+                sc.WaitForStatus(ServiceControllerStatus.Running);
+            }
         }
 
         #endregion

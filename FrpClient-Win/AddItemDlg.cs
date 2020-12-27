@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace FrpClient_Win
@@ -15,11 +16,11 @@ namespace FrpClient_Win
         private void AddItem_Click(object sender, System.EventArgs e)
         {
             cNewItemInfo.strType = InputAddType.Text;
-            cNewItemInfo.nLocalPort = Convert.ToInt32(InputAddLoaclPort.Text);
+            cNewItemInfo.nLocalPort = InputAddLoaclPort.Text;
             cNewItemInfo.strLocalIp = InputAddLoaclIP.Text;
-            cNewItemInfo.nRemotePort = Convert.ToInt32(InputAddRemotePort.Text);
+            cNewItemInfo.nRemotePort = InputAddRemotePort.Text;
             cNewItemInfo.strDomain = InputAddDomain.Text;
-            cNewItemInfo.strSectionName = InputAddSectionName.Text;
+            cNewItemInfo.strSectionName = (Regex.IsMatch(InputAddLoaclPort.Text+InputAddRemotePort.Text, @"[,-]") && !Regex.IsMatch(InputAddSectionName.Text, @"^range:.*")) ? ("range:" + InputAddSectionName.Text) : InputAddSectionName.Text;
             cNewItemInfo.strUseEncryption = CheckAddUseEncryption.Checked;
             cNewItemInfo.strUseCompression = CheckAddUseCompression.Checked;
 
