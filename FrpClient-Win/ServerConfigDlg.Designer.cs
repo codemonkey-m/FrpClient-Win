@@ -31,6 +31,8 @@
             this.SaveServerConfig = new System.Windows.Forms.Button();
             this.CancelConfig = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.FrpAdminPort = new System.Windows.Forms.TextBox();
+            this.FrpAdmin = new System.Windows.Forms.CheckBox();
             this.FrpUser = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.FrpToken = new System.Windows.Forms.TextBox();
@@ -39,8 +41,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.FrpAdmin = new System.Windows.Forms.CheckBox();
-            this.FrpAdminPort = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -88,6 +88,28 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "通用参数";
             // 
+            // FrpAdminPort
+            // 
+            this.FrpAdminPort.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.FrpAdminPort.Enabled = false;
+            this.FrpAdminPort.Location = new System.Drawing.Point(234, 157);
+            this.FrpAdminPort.Name = "FrpAdminPort";
+            this.FrpAdminPort.Size = new System.Drawing.Size(67, 21);
+            this.FrpAdminPort.TabIndex = 9;
+            this.FrpAdminPort.Text = "7400";
+            // 
+            // FrpAdmin
+            // 
+            this.FrpAdmin.AutoSize = true;
+            this.FrpAdmin.Location = new System.Drawing.Point(24, 161);
+            this.FrpAdmin.Name = "FrpAdmin";
+            this.FrpAdmin.Size = new System.Drawing.Size(204, 16);
+            this.FrpAdmin.TabIndex = 8;
+            this.FrpAdmin.Text = "开启客户端面板（热加载），端口";
+            this.FrpAdmin.UseVisualStyleBackColor = true;
+            this.FrpAdmin.CheckedChanged += new System.EventHandler(this.FrpAdmin_CheckedChanged);
+            // 
             // FrpUser
             // 
             this.FrpUser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -100,7 +122,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(22, 130);
+            this.label4.Location = new System.Drawing.Point(29, 129);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 12);
             this.label4.TabIndex = 6;
@@ -136,16 +158,16 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 99);
+            this.label3.Location = new System.Drawing.Point(35, 98);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 12);
+            this.label3.Size = new System.Drawing.Size(59, 12);
             this.label3.TabIndex = 2;
-            this.label3.Text = "验证字符串";
+            this.label3.Text = "验证Token";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(23, 66);
+            this.label2.Location = new System.Drawing.Point(23, 65);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(71, 12);
             this.label2.TabIndex = 1;
@@ -159,28 +181,6 @@
             this.label1.Size = new System.Drawing.Size(71, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "frp服务器IP";
-            // 
-            // FrpAdmin
-            // 
-            this.FrpAdmin.AutoSize = true;
-            this.FrpAdmin.Location = new System.Drawing.Point(24, 161);
-            this.FrpAdmin.Name = "FrpAdmin";
-            this.FrpAdmin.Size = new System.Drawing.Size(204, 16);
-            this.FrpAdmin.TabIndex = 8;
-            this.FrpAdmin.Text = "开启客户端面板（热加载），端口";
-            this.FrpAdmin.UseVisualStyleBackColor = true;
-            this.FrpAdmin.CheckedChanged += new System.EventHandler(this.FrpAdmin_CheckedChanged);
-            // 
-            // FrpAdminPort
-            // 
-            this.FrpAdminPort.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.FrpAdminPort.Enabled = false;
-            this.FrpAdminPort.Location = new System.Drawing.Point(234, 157);
-            this.FrpAdminPort.Name = "FrpAdminPort";
-            this.FrpAdminPort.Size = new System.Drawing.Size(67, 21);
-            this.FrpAdminPort.TabIndex = 9;
-            this.FrpAdminPort.Text = "7400";
             // 
             // ServerConfigDlg
             // 

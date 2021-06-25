@@ -23,7 +23,9 @@ namespace FrpClient_Win
         public string strDomain = "";
         public bool strUseEncryption = false;
         public bool strUseCompression = false;
+        public bool strTlsEnable = false;
         public string strSectionName = "rdp";
+        public string strSk = "";
     }
 
     class DB
@@ -35,7 +37,7 @@ namespace FrpClient_Win
 
         private static DB Global_DB = null;
         
-        public const string strFileName = "./config.ini";
+        public const string strFileName = "./frpc.ini";
         private const string strCommon = "common";
 
         private const string strServerAddr = "server_addr";
@@ -51,6 +53,10 @@ namespace FrpClient_Win
         private const string strDomain = "custom_domains";
         private const string strUseEncryption = "use_encryption";
         private const string strUseCompression = "use_compression";
+
+        private const string strSk = "sk";
+        private const string strTlsEnable = "tls_enable";
+
 
         public ServerInfo cServerinfo = new ServerInfo();
         public List<ItemInfo> listItems = new List<ItemInfo>();
@@ -89,6 +95,8 @@ namespace FrpClient_Win
                 cInfo.strDomain = GetValue(strSection, strDomain);
                 cInfo.strUseEncryption = Convert.ToBoolean(GetValue(strSection, strUseEncryption));
                 cInfo.strUseCompression = Convert.ToBoolean(GetValue(strSection, strUseCompression));
+                cInfo.strTlsEnable = Convert.ToBoolean(GetValue(strSection,strTlsEnable));
+                cInfo.strSk = GetValue(strSection,strSk);
 
                 listItems.Add(cInfo);
             }
@@ -154,19 +162,28 @@ namespace FrpClient_Win
             WritePrivateProfileString(strCommon, strServerAddr, cServerinfo.strIp, strFileName);
             WritePrivateProfileString(strCommon, strServerPort, cServerinfo.nPort.ToString(), strFileName);
             WritePrivateProfileString(strCommon, strServerToken, cServerinfo.strToken, strFileName);
-            WritePrivateProfileString(strCommon, strServerUser, cServerinfo.strUser, strFileName);
-            WritePrivateProfileString(strCommon, strAdminPort, cServerinfo.nAdminPort.ToString(), strFileName);
+            if(!string.IsNullOrEmpty(cServerinfo.strUser))
+                WritePrivateProfileString(strCommon, strServerUser, cServerinfo.strUser, strFileName);
+            if(cServerinfo.nAdminPort!=0)
+                WritePrivateProfileString(strCommon, strAdminPort, cServerinfo.nAdminPort.ToString(), strFileName);
 
             //写各个项
             foreach (var info in listItems)
             {
                 WritePrivateProfileString(info.strSectionName, strFrpType, info.strType, strFileName);
-                WritePrivateProfileString(info.strSectionName, strLocalPort, info.nLocalPort.ToString(), strFileName);
+                WritePrivateProfileString(info.strSectionName, strLocalPort, info.nLocalPort, strFileName);
                 WritePrivateProfileString(info.strSectionName, strLocalIp, info.strLocalIp, strFileName);
-                WritePrivateProfileString(info.strSectionName, strRemotePort, info.nRemotePort.ToString(), strFileName);
-                WritePrivateProfileString(info.strSectionName, strDomain, info.strDomain, strFileName);
-                WritePrivateProfileString(info.strSectionName, strUseEncryption, info.strUseEncryption.ToString().ToLower(), strFileName);
-                WritePrivateProfileString(info.strSectionName, strUseCompression, info.strUseCompression.ToString().ToLower(), strFileName);
+                if (!string.IsNullOrEmpty(info.nRemotePort))
+                    WritePrivateProfileString(info.strSectionName, strRemotePort, info.nRemotePort, strFileName);
+                if (!string.IsNullOrEmpty(info.strDomain))
+                    WritePrivateProfileString(info.strSectionName, strDomain, info.strDomain, strFileName);
+                if(info.strUseEncryption!=false)
+                    WritePrivateProfileString(info.strSectionName, strUseEncryption, info.strUseEncryption.ToString().ToLower(), strFileName);
+                if(info.strUseCompression!=false)
+                    WritePrivateProfileString(info.strSectionName, strUseCompression, info.strUseCompression.ToString().ToLower(), strFileName);
+                if(info.strTlsEnable!=false)
+                    WritePrivateProfileString(info.strSectionName,strTlsEnable,info.strTlsEnable.ToString().ToLower(),strFileName);
+                WritePrivateProfileString(info.strSectionName,strSk,info.strSk,strFileName);
             }
 
             return true;
@@ -187,7 +204,7 @@ namespace FrpClient_Win
         {
             byte[] buffer = new byte[2048];
             int length = GetPrivateProfileString(null, "", "", buffer, 999, filePath);
-            string[] rs = System.Text.UTF8Encoding.Default.GetString(buffer, 0, length).Split(new string[] { "\0" }, StringSplitOptions.RemoveEmptyEntries);
+            string[] rs = System.Text.Encoding.Default.GetString(buffer, 0, length).Split(new string[] { "\0" }, StringSplitOptions.RemoveEmptyEntries);
             return rs;
         }
     }

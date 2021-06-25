@@ -53,6 +53,7 @@
             this.About = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exit_toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tls_enable = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -76,7 +77,7 @@
             this.groupBox1.Controls.Add(this.ServerList);
             this.groupBox1.Location = new System.Drawing.Point(13, 68);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(775, 370);
+            this.groupBox1.Size = new System.Drawing.Size(823, 373);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "转发列表（双击修改/删除）";
@@ -87,12 +88,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ProcOutput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(49)))), ((int)(((byte)(52)))));
             this.ProcOutput.ForeColor = System.Drawing.SystemColors.Info;
-            this.ProcOutput.Location = new System.Drawing.Point(6, 279);
+            this.ProcOutput.Location = new System.Drawing.Point(6, 282);
             this.ProcOutput.Multiline = true;
             this.ProcOutput.Name = "ProcOutput";
             this.ProcOutput.ReadOnly = true;
             this.ProcOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ProcOutput.Size = new System.Drawing.Size(763, 85);
+            this.ProcOutput.Size = new System.Drawing.Size(811, 85);
             this.ProcOutput.TabIndex = 4;
             // 
             // ServerList
@@ -110,14 +111,15 @@
             this.server_port,
             this.host,
             this.use_encryption,
-            this.use_compression});
+            this.use_compression,
+            this.tls_enable});
             this.ServerList.FullRowSelect = true;
             this.ServerList.GridLines = true;
             this.ServerList.HideSelection = false;
             this.ServerList.Location = new System.Drawing.Point(6, 20);
             this.ServerList.MultiSelect = false;
             this.ServerList.Name = "ServerList";
-            this.ServerList.Size = new System.Drawing.Size(763, 253);
+            this.ServerList.Size = new System.Drawing.Size(811, 256);
             this.ServerList.TabIndex = 4;
             this.ServerList.UseCompatibleStateImageBehavior = false;
             this.ServerList.View = System.Windows.Forms.View.Details;
@@ -251,11 +253,15 @@
             this.exit_toolStripMenuItem.Text = "退出";
             this.exit_toolStripMenuItem.Click += new System.EventHandler(this.Exit_toolStripMenuItem_Click);
             // 
+            // tls_enable
+            // 
+            this.tls_enable.Text = "TLS";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(848, 453);
             this.Controls.Add(this.AddItem);
             this.Controls.Add(this.ServerConfig);
             this.Controls.Add(this.groupBox1);
@@ -298,6 +304,7 @@
         private System.Windows.Forms.ToolStripMenuItem RestartSysService;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem StopSysService;
+        private System.Windows.Forms.ColumnHeader tls_enable;
     }
 }
 
