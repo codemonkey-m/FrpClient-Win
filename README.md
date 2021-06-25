@@ -1,6 +1,6 @@
 # FrpClient-Win
 [![License](https://img.shields.io/badge/license-ANTI996-green.svg)](https://github.com/codemonkey-m/FrpClient-Win/blob/master/LICENSE)
-[![Lastest Release](https://img.shields.io/github/release/Cp0204/FrpClient-Win/all.svg)](https://github.com/codemonkey-m/FrpClient-Win/releases)
+[![Lastest Release](https://img.shields.io/github/release/codemonkey-m/FrpClient-Win/all.svg)](https://github.com/codemonkey-m/FrpClient-Win/releases)
 
 [frpc](https://github.com/fatedier/frp) 的 Windows GUI 客户端，图形化配置 frpc，以及支持开机启动，仅在 Win10 下测试。  
 
