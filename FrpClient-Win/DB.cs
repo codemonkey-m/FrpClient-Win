@@ -37,7 +37,7 @@ namespace FrpClient_Win
 
         private static DB Global_DB = null;
         
-        public const string strFileName = "./frpc.ini";
+        public const string strFileName = "./config.ini";
         private const string strCommon = "common";
 
         private const string strServerAddr = "server_addr";
