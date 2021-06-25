@@ -85,7 +85,7 @@ namespace FrpClient_Win
         private static bool IsDuplicateInstance() {
             bool bCreatedNew;
             // 允许不同目录实例
-            string name = System.Windows.Forms.Application.StartupPath;
+            string name = Application.StartupPath;
             name = name.Replace("\\", "/");
             //创建Mutex互斥对象
             System.Threading.Mutex newMutex = new System.Threading.Mutex(true, name, out bCreatedNew);
@@ -102,13 +102,34 @@ namespace FrpClient_Win
             {
                 ListViewItem item = new ListViewItem(info.strSectionName);
                 item.SubItems.Add(info.strType);
-                item.SubItems.Add(info.nLocalPort.ToString());
+                item.SubItems.Add(info.nLocalPort);
                 item.SubItems.Add(info.strLocalIp);
-                item.SubItems.Add(info.nRemotePort.ToString());
+                item.SubItems.Add(info.nRemotePort);
                 item.SubItems.Add(info.strDomain);
-                item.SubItems.Add(info.strUseEncryption.ToString().ToLower());
-                item.SubItems.Add(info.strUseCompression.ToString().ToLower());
-
+                if (info.strUseEncryption)
+                {
+                    item.SubItems.Add(info.strUseEncryption.ToString().ToLower());
+                }
+                else
+                {
+                    item.SubItems.Add("");
+                }
+                if (info.strUseCompression)
+                {
+                    item.SubItems.Add(info.strUseCompression.ToString().ToLower());
+                }
+                else
+                {
+                    item.SubItems.Add("");
+                }
+                if (info.strTlsEnable)
+                {
+                    item.SubItems.Add(info.strTlsEnable.ToString().ToLower());
+                }
+                else
+                {
+                    item.SubItems.Add("");
+                }
                 ServerList.Items.Add(item);
             }
         }
