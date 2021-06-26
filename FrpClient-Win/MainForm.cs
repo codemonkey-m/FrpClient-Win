@@ -17,7 +17,7 @@ namespace FrpClient_Win
         public MainForm()
         {
             InitializeComponent();
-            Control.CheckForIllegalCrossThreadCalls = false;
+            CheckForIllegalCrossThreadCalls = false;
 
             //判断开机启动状态
             AutoRun.Checked = CheckRegExists(strRegName);
@@ -27,8 +27,8 @@ namespace FrpClient_Win
         {
             if(e.CloseReason == CloseReason.UserClosing) {
                 e.Cancel = true;
-                this.Hide();
-                this.ShowInTaskbar = false;
+                Hide();
+                ShowInTaskbar = false;
                 return;
             }
         }
@@ -36,7 +36,7 @@ namespace FrpClient_Win
         private void OnMainFormLoad(object sender, EventArgs e)
         {
             System.IO.Directory.SetCurrentDirectory(System.Windows.Forms.Application.StartupPath);
-            this.Text = this.Text + " - v" + Application.ProductVersion.ToString();
+            Text = Text + " - v" + Application.ProductVersion.ToString();
 
             // 检查同目录多开
             if(IsDuplicateInstance()){
@@ -54,7 +54,7 @@ namespace FrpClient_Win
                     AutoSysService.Checked = RestartSysService.Enabled = StopSysService.Enabled = false;
                 } else {
                     AutoSysService.Checked = true;
-                    ProcOutput.AppendText($"已注册到系统服务，当前状态：{ServiceHelper.Status(strRegName).ToString()}" + "\r\n");
+                    ProcOutput.AppendText($"已注册到系统服务，当前状态：{ServiceHelper.Status(strRegName)}" + "\r\n");
                     if(ServiceHelper.Status(strRegName).ToString() == "Running")
                         sStatus = true;
                 }
@@ -66,7 +66,7 @@ namespace FrpClient_Win
             InitList(true);
             UpdateStartButton();
             //notifyIcon.Icon = this.Icon;
-            notifyIcon.Text = this.Text;
+            notifyIcon.Text = Text;
 
             //设置自启之后，开机启动要直接启动frp，并最小到托盘
             if (AutoRun.Checked)
@@ -74,8 +74,8 @@ namespace FrpClient_Win
                 string[] strArgs = Environment.GetCommandLineArgs();
                 if (strArgs.Length >= 2 && strArgs[1].Equals(strAutoRun))
                 {
-                    this.Hide();
-                    this.ShowInTaskbar = false;
+                    Hide();
+                    ShowInTaskbar = false;
                     RestartService_Click(null, null);
                 }
             }
@@ -100,37 +100,34 @@ namespace FrpClient_Win
             ServerList.Items.Clear();
             foreach (ItemInfo info in DB.Instance().listItems)
             {
-                ListViewItem item = new ListViewItem(info.strSectionName);
-                item.SubItems.Add(info.strType);
-                item.SubItems.Add(info.nLocalPort);
-                item.SubItems.Add(info.strLocalIp);
-                item.SubItems.Add(info.nRemotePort);
-                item.SubItems.Add(info.strDomain);
-                if (info.strUseEncryption)
+                ListViewItem item = new ListViewItem(info.SectionName);
+                item.SubItems.Add(info.Type);
+                item.SubItems.Add(info.LocalPort);
+                item.SubItems.Add(info.LocalIp);
+                item.SubItems.Add(info.RemotePort);
+                item.SubItems.Add(info.Domain);
+                BooleanItemHandler(ref item,info.UseEncryption);
+                BooleanItemHandler(ref item,info.UseCompression);
+                BooleanItemHandler(ref item, info.TlsEnable);
+                if (DB.Instance().IsVisitorMode(info))
                 {
-                    item.SubItems.Add(info.strUseEncryption.ToString().ToLower());
+                    info.IsVisitor = true;
                 }
-                else
-                {
-                    item.SubItems.Add("");
-                }
-                if (info.strUseCompression)
-                {
-                    item.SubItems.Add(info.strUseCompression.ToString().ToLower());
-                }
-                else
-                {
-                    item.SubItems.Add("");
-                }
-                if (info.strTlsEnable)
-                {
-                    item.SubItems.Add(info.strTlsEnable.ToString().ToLower());
-                }
-                else
-                {
-                    item.SubItems.Add("");
-                }
+                BooleanItemHandler(ref item, info.IsVisitor);
+                item.SubItems.Add(info.ServerName);
                 ServerList.Items.Add(item);
+            }
+        }
+
+        private void BooleanItemHandler(ref ListViewItem lvi,bool item)
+        {
+            if (item)
+            {
+                lvi.SubItems.Add(item.ToString().ToLower());
+            }
+            else
+            {
+                lvi.SubItems.Add("");
             }
         }
 
@@ -179,7 +176,7 @@ namespace FrpClient_Win
 
         private void MyProcOutputHandler(object sendingProcess, DataReceivedEventArgs outLine)
         {
-            if(!String.IsNullOrEmpty(outLine.Data)) {
+            if(!string.IsNullOrEmpty(outLine.Data)) {
                 ProcOutput.AppendText(outLine.Data.ToString() + "\r\n");
                 ProcOutput.SelectionStart = ProcOutput.Text.Length;
                 ProcOutput.ScrollToCaret();
@@ -215,7 +212,7 @@ namespace FrpClient_Win
             }
         }
 
-        private void OnFrpExit(Object sender, EventArgs e)
+        private void OnFrpExit(object sender, EventArgs e)
         {
             frp_process = null;
             bStatus = false;
@@ -258,10 +255,10 @@ namespace FrpClient_Win
         }
 
         private void NotifyIcon_MouseClick(object sender, MouseEventArgs e) {
-            if(e.Button == System.Windows.Forms.MouseButtons.Left) {
-                this.Show();
-                this.Activate();
-                this.ShowInTaskbar = true;
+            if(e.Button == MouseButtons.Left) {
+                Show();
+                Activate();
+                ShowInTaskbar = true;
                 ProcOutput.ScrollToCaret();
             }
         }
@@ -305,7 +302,7 @@ namespace FrpClient_Win
         //关于
         private void About_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/codemonkey-m/FrpClient-Win");
+            Process.Start("https://github.com/codemonkey-m/FrpClient-Win");
         }
 
         private void AutoSysService_Click(object sender, EventArgs e) {
@@ -333,14 +330,39 @@ namespace FrpClient_Win
 
         private void RestartSysService_Click(object sender, EventArgs e) {
             ServiceHelper.Restart(strRegName);
-            ProcOutput.AppendText($"已重启系统服务，当前状态：{ServiceHelper.Status(strRegName).ToString()}（控制台无输出）..." + "\r\n");
+            ProcOutput.AppendText($"已重启系统服务，当前状态：{ServiceHelper.Status(strRegName)}（控制台无输出）..." + "\r\n");
             sStatus = true;
         }
 
         private void StopSysService_Click(object sender, EventArgs e) {
             ServiceHelper.Restart(strRegName, false);
-            ProcOutput.AppendText($"已停止系统服务，当前状态：{ServiceHelper.Status(strRegName).ToString()}（控制台无输出）..." + "\r\n");
+            ProcOutput.AppendText($"已停止系统服务，当前状态：{ServiceHelper.Status(strRegName)}（控制台无输出）..." + "\r\n");
             sStatus = false;
+        }
+
+        private void RdpConfig_Click(object sender, EventArgs e)
+        {
+            RdpConfigDlg dlg = new RdpConfigDlg();
+            if (dlg.ShowDialog()==DialogResult.OK)
+            {
+                if (dlg.RdpPort.ToString()!=RdpHelper.GetRdpPort())
+                {
+                    if (RdpHelper.SetRdpPort(dlg.RdpPort))
+                    {
+                        MessageBox.Show("RDP 端口修改成功");
+                    }
+                    else
+                    {
+                        MessageBox.Show("RDP 端口修改失败");
+                    }
+                }
+                if (dlg.RdpOpen!=RdpHelper.GetRdpStatus())
+                {
+                    RdpHelper.SetRdpStatus(dlg.RdpOpen);
+                    MessageBox.Show($"RDP开启状态：{RdpHelper.GetRdpStatus()}");
+                }
+                
+            } 
         }
     }
 }
