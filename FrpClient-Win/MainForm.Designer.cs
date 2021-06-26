@@ -42,6 +42,7 @@
             this.host = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.use_encryption = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.use_compression = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tls_enable = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ServerConfig = new System.Windows.Forms.Button();
             this.AddItem = new System.Windows.Forms.Button();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
@@ -53,7 +54,9 @@
             this.About = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exit_toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tls_enable = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.isVisitor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.server_name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.RdpConfig = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -77,7 +80,7 @@
             this.groupBox1.Controls.Add(this.ServerList);
             this.groupBox1.Location = new System.Drawing.Point(13, 68);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(823, 373);
+            this.groupBox1.Size = new System.Drawing.Size(984, 373);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "转发列表（双击修改/删除）";
@@ -93,7 +96,7 @@
             this.ProcOutput.Name = "ProcOutput";
             this.ProcOutput.ReadOnly = true;
             this.ProcOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ProcOutput.Size = new System.Drawing.Size(811, 85);
+            this.ProcOutput.Size = new System.Drawing.Size(972, 85);
             this.ProcOutput.TabIndex = 4;
             // 
             // ServerList
@@ -112,14 +115,16 @@
             this.host,
             this.use_encryption,
             this.use_compression,
-            this.tls_enable});
+            this.tls_enable,
+            this.isVisitor,
+            this.server_name});
             this.ServerList.FullRowSelect = true;
             this.ServerList.GridLines = true;
             this.ServerList.HideSelection = false;
             this.ServerList.Location = new System.Drawing.Point(6, 20);
             this.ServerList.MultiSelect = false;
             this.ServerList.Name = "ServerList";
-            this.ServerList.Size = new System.Drawing.Size(811, 256);
+            this.ServerList.Size = new System.Drawing.Size(972, 256);
             this.ServerList.TabIndex = 4;
             this.ServerList.UseCompatibleStateImageBehavior = false;
             this.ServerList.View = System.Windows.Forms.View.Details;
@@ -161,6 +166,10 @@
             // use_compression
             // 
             this.use_compression.Text = "压缩";
+            // 
+            // tls_enable
+            // 
+            this.tls_enable.Text = "TLS";
             // 
             // ServerConfig
             // 
@@ -253,15 +262,31 @@
             this.exit_toolStripMenuItem.Text = "退出";
             this.exit_toolStripMenuItem.Click += new System.EventHandler(this.Exit_toolStripMenuItem_Click);
             // 
-            // tls_enable
+            // isVisitor
             // 
-            this.tls_enable.Text = "TLS";
+            this.isVisitor.Text = "访问模式";
+            // 
+            // server_name
+            // 
+            this.server_name.Text = "访问标签";
+            this.server_name.Width = 92;
+            // 
+            // RdpConfig
+            // 
+            this.RdpConfig.Location = new System.Drawing.Point(295, 13);
+            this.RdpConfig.Name = "RdpConfig";
+            this.RdpConfig.Size = new System.Drawing.Size(82, 40);
+            this.RdpConfig.TabIndex = 3;
+            this.RdpConfig.Text = "RDP配置";
+            this.RdpConfig.UseVisualStyleBackColor = true;
+            this.RdpConfig.Click += new System.EventHandler(this.RdpConfig_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(848, 453);
+            this.ClientSize = new System.Drawing.Size(1009, 453);
+            this.Controls.Add(this.RdpConfig);
             this.Controls.Add(this.AddItem);
             this.Controls.Add(this.ServerConfig);
             this.Controls.Add(this.groupBox1);
@@ -305,6 +330,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem StopSysService;
         private System.Windows.Forms.ColumnHeader tls_enable;
+        private System.Windows.Forms.ColumnHeader isVisitor;
+        private System.Windows.Forms.ColumnHeader server_name;
+        private System.Windows.Forms.Button RdpConfig;
     }
 }
 

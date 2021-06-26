@@ -16,16 +16,19 @@ namespace FrpClient_Win
 
     class ItemInfo
     {
-        public string strType = "tcp";
-        public string nLocalPort = "3389";
-        public string strLocalIp = "127.0.0.1";
-        public string nRemotePort = "13389";
-        public string strDomain = "";
-        public bool strUseEncryption = false;
-        public bool strUseCompression = false;
-        public bool strTlsEnable = false;
-        public string strSectionName = "rdp";
-        public string strSk = "";
+        public string Type = "tcp";
+        public string LocalPort = "3389";
+        public string LocalIp = "127.0.0.1";
+        public string RemotePort = "13389";
+        public string Domain = "";
+        public bool UseEncryption = false;
+        public bool UseCompression = false;
+        public bool TlsEnable = false;
+        public string SectionName = "rdp";
+        public string Sk = "";
+        public bool IsVisitor = false;
+        public string ServerName = "";
+        public string Role = "";
     }
 
     class DB
@@ -56,6 +59,10 @@ namespace FrpClient_Win
 
         private const string strSk = "sk";
         private const string strTlsEnable = "tls_enable";
+        private const string strRole = "role";
+        private const string strServerName = "server_name";
+        private const string strBindIp = "bind_ip";
+        private const string strBindPort = "bind_port";
 
 
         public ServerInfo cServerinfo = new ServerInfo();
@@ -87,29 +94,45 @@ namespace FrpClient_Win
 
                 //分别读取每一个项
                 ItemInfo cInfo = new ItemInfo();
-                cInfo.strSectionName = strSection;
-                cInfo.strType = GetValue(strSection, strFrpType);
-                cInfo.nLocalPort = GetValue(strSection, strLocalPort);
-                cInfo.strLocalIp = GetValue(strSection, strLocalIp);
-                cInfo.nRemotePort = GetValue(strSection, strRemotePort);
-                cInfo.strDomain = GetValue(strSection, strDomain);
-                cInfo.strUseEncryption = Convert.ToBoolean(GetValue(strSection, strUseEncryption));
-                cInfo.strUseCompression = Convert.ToBoolean(GetValue(strSection, strUseCompression));
-                cInfo.strTlsEnable = Convert.ToBoolean(GetValue(strSection,strTlsEnable));
-                cInfo.strSk = GetValue(strSection,strSk);
+                cInfo.SectionName = strSection;
+                cInfo.ServerName = GetValue(strSection, strServerName);
+                cInfo.Role = GetValue(strSection, strRole);
+                cInfo.Type = GetValue(strSection, strFrpType);
+                cInfo.LocalPort = GetValue(strSection, IsVisitorMode(cInfo) ? strBindPort : strLocalPort);
+                cInfo.LocalIp = GetValue(strSection, IsVisitorMode(cInfo) ? strBindIp : strLocalIp);
+                cInfo.RemotePort = GetValue(strSection, strRemotePort);
+                cInfo.Domain = GetValue(strSection, strDomain);
+                cInfo.UseEncryption = Convert.ToBoolean(GetValue(strSection, strUseEncryption));
+                cInfo.UseCompression = Convert.ToBoolean(GetValue(strSection, strUseCompression));
+                cInfo.TlsEnable = Convert.ToBoolean(GetValue(strSection,strTlsEnable));
+                cInfo.Sk = GetValue(strSection,strSk);
+                if (IsVisitorMode(cInfo))
+                {
+                    cInfo.IsVisitor = true;
+                }
 
                 listItems.Add(cInfo);
+                
             }
 
             return true;
         }
+
+        public bool IsVisitorMode(ItemInfo itemInfo)
+        {
+            if (itemInfo.Type == "stcp" && !string.IsNullOrEmpty(itemInfo.ServerName) && itemInfo.Role == "visitor")
+            {
+                return true;
+            }
+            return false;
+        } 
 
         public bool AddItem(ItemInfo cInfo)
         {
             bool bExists = false;
             for (int i = 0; i < listItems.Count; i++)
             {
-                if(listItems[i].strSectionName == cInfo.strSectionName)
+                if(listItems[i].SectionName == cInfo.SectionName)
                 {
                     listItems[i] = cInfo;
                     bExists = true;
@@ -129,7 +152,7 @@ namespace FrpClient_Win
             {
                 foreach (var info in listItems)
                 {
-                    if (info.strSectionName == strSectionName)
+                    if (info.SectionName == strSectionName)
                         return info;
                 }
             }
@@ -141,7 +164,7 @@ namespace FrpClient_Win
         {
             foreach (var info in listItems)
             {
-                if (info.strSectionName == strSectionName)
+                if (info.SectionName == strSectionName)
                 {
                     listItems.Remove(info);
                     break;
@@ -170,20 +193,32 @@ namespace FrpClient_Win
             //写各个项
             foreach (var info in listItems)
             {
-                WritePrivateProfileString(info.strSectionName, strFrpType, info.strType, strFileName);
-                WritePrivateProfileString(info.strSectionName, strLocalPort, info.nLocalPort, strFileName);
-                WritePrivateProfileString(info.strSectionName, strLocalIp, info.strLocalIp, strFileName);
-                if (!string.IsNullOrEmpty(info.nRemotePort))
-                    WritePrivateProfileString(info.strSectionName, strRemotePort, info.nRemotePort, strFileName);
-                if (!string.IsNullOrEmpty(info.strDomain))
-                    WritePrivateProfileString(info.strSectionName, strDomain, info.strDomain, strFileName);
-                if(info.strUseEncryption!=false)
-                    WritePrivateProfileString(info.strSectionName, strUseEncryption, info.strUseEncryption.ToString().ToLower(), strFileName);
-                if(info.strUseCompression!=false)
-                    WritePrivateProfileString(info.strSectionName, strUseCompression, info.strUseCompression.ToString().ToLower(), strFileName);
-                if(info.strTlsEnable!=false)
-                    WritePrivateProfileString(info.strSectionName,strTlsEnable,info.strTlsEnable.ToString().ToLower(),strFileName);
-                WritePrivateProfileString(info.strSectionName,strSk,info.strSk,strFileName);
+                if (info.IsVisitor)
+                {
+                    info.SectionName += !info.SectionName.Contains("_visitor")?"_visitor":"";
+                    WritePrivateProfileString(info.SectionName, strRole, "visitor", strFileName);
+                    WritePrivateProfileString(info.SectionName, strBindIp, info.LocalIp, strFileName);
+                    WritePrivateProfileString(info.SectionName, strBindPort, info.LocalPort, strFileName);
+                    WritePrivateProfileString(info.SectionName, strServerName, info.ServerName, strFileName);
+                }
+                else
+                {
+                    WritePrivateProfileString(info.SectionName, strLocalIp, info.LocalIp, strFileName);
+                    WritePrivateProfileString(info.SectionName, strLocalPort, info.LocalPort, strFileName);
+                }
+                WritePrivateProfileString(info.SectionName, strFrpType, info.Type, strFileName);
+                
+                if (!string.IsNullOrEmpty(info.RemotePort))
+                    WritePrivateProfileString(info.SectionName, strRemotePort, info.RemotePort, strFileName);
+                if (!string.IsNullOrEmpty(info.Domain))
+                    WritePrivateProfileString(info.SectionName, strDomain, info.Domain, strFileName);
+                if(info.UseEncryption!=false)
+                    WritePrivateProfileString(info.SectionName, strUseEncryption, info.UseEncryption.ToString().ToLower(), strFileName);
+                if(info.UseCompression!=false)
+                    WritePrivateProfileString(info.SectionName, strUseCompression, info.UseCompression.ToString().ToLower(), strFileName);
+                if(info.TlsEnable!=false)
+                    WritePrivateProfileString(info.SectionName,strTlsEnable,info.TlsEnable.ToString().ToLower(),strFileName);
+                WritePrivateProfileString(info.SectionName,strSk,info.Sk,strFileName);
             }
 
             return true;
@@ -196,7 +231,7 @@ namespace FrpClient_Win
             if (length <= 0)
                 return null;
 
-            string rs = System.Text.UTF8Encoding.Default.GetString(buffer, 0, length);
+            string rs = System.Text.Encoding.Default.GetString(buffer, 0, length);
             return rs;
         }
 
