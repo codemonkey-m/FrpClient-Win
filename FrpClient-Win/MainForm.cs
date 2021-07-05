@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.Security.Principal;
 using System.Windows.Forms;
 using Microsoft.Win32;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace FrpClient_Win
 {
@@ -11,8 +13,20 @@ namespace FrpClient_Win
         Process frp_process = null;
         bool bStatus = false;
         bool sStatus = false;
-        const string strRegName = "FrpClient";
+        string strRegName = "FrpClient_" + MD5Encrypt32(System.Windows.Forms.Application.StartupPath).Substring(0, 6);
         const string strAutoRun = "autorun";
+
+        // 32位的MD5加密
+        public static string MD5Encrypt32(string password) {
+            string cl = password;
+            string pwd = "";
+            MD5 md5 = MD5.Create();
+            byte[] s = md5.ComputeHash(Encoding.UTF8.GetBytes(cl));
+            for(int i = 0; i < s.Length; i++) {
+                pwd = pwd + s[i].ToString("x");
+            }
+            return pwd;
+        }
 
         public MainForm()
         {
