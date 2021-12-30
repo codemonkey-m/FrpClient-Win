@@ -18,10 +18,9 @@ namespace FrpClient_Win
 
         // 32位的MD5加密
         public static string MD5Encrypt32(string password) {
-            string cl = password;
             string pwd = "";
             MD5 md5 = MD5.Create();
-            byte[] s = md5.ComputeHash(Encoding.UTF8.GetBytes(cl));
+            byte[] s = md5.ComputeHash(Encoding.UTF8.GetBytes(password));
             for(int i = 0; i < s.Length; i++) {
                 pwd = pwd + s[i].ToString("x");
             }
@@ -257,6 +256,7 @@ namespace FrpClient_Win
 
             //关闭之后刷新界面
             InitList();
+            ReloadFrp();
         }
 
         private void UpdateStartButton()

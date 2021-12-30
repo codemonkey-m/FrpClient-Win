@@ -23,6 +23,8 @@ namespace FrpClient_Win
             DB.Instance().cServerinfo.strToken = FrpToken.Text;
             DB.Instance().cServerinfo.strUser = FrpUser.Text;
             DB.Instance().cServerinfo.nAdminPort = Convert.ToInt32(FrpAdminPort.Text);
+            DB.Instance().cServerinfo.strAdminUser = FrpAdminUser.Text;
+            DB.Instance().cServerinfo.strAdminPwd = FrpAdminPwd.Text;
 
             DB.Instance().SaveConfig();
             Close();
@@ -36,14 +38,23 @@ namespace FrpClient_Win
             FrpToken.Text = DB.Instance().cServerinfo.strToken;
             FrpUser.Text = DB.Instance().cServerinfo.strUser;
             FrpAdminPort.Text = DB.Instance().cServerinfo.nAdminPort.ToString();
+            FrpAdminUser.Text = DB.Instance().cServerinfo.strAdminUser;
+            FrpAdminPwd.Text = DB.Instance().cServerinfo.strAdminPwd;
             if(DB.Instance().cServerinfo.nAdminPort > 0) {
-                FrpAdminPort.Enabled = FrpAdmin.Checked = true;
+                FrpAdminUser.Enabled = FrpAdminPwd.Enabled = FrpAdminPort.Enabled = FrpAdmin.Checked = true;
             }
         }
 
         private void FrpAdmin_CheckedChanged(object sender, EventArgs e) {
-            FrpAdminPort.Enabled = FrpAdmin.Checked;
+            FrpAdminUser.Enabled = FrpAdminPwd.Enabled = FrpAdminPort.Enabled = FrpAdmin.Checked;
             FrpAdminPort.Text = FrpAdmin.Checked ? "7400" : "0";
+            if(FrpAdminUser.Text == "") {
+                FrpAdminUser.Text = "admin";
+            }
+            if(FrpAdminPwd.Text == "") {
+                Random rd = new Random();
+                FrpAdminPwd.Text = "admin" + rd.Next(100000,999999).ToString();
+            }
         }
     }
 }

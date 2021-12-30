@@ -43,6 +43,8 @@
             this.use_encryption = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.use_compression = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tls_enable = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.isVisitor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.server_name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ServerConfig = new System.Windows.Forms.Button();
             this.AddItem = new System.Windows.Forms.Button();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
@@ -54,8 +56,6 @@
             this.About = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exit_toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.isVisitor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.server_name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.RdpConfig = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
@@ -80,7 +80,7 @@
             this.groupBox1.Controls.Add(this.ServerList);
             this.groupBox1.Location = new System.Drawing.Point(13, 68);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(984, 373);
+            this.groupBox1.Size = new System.Drawing.Size(853, 373);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "转发列表（双击修改/删除）";
@@ -96,7 +96,7 @@
             this.ProcOutput.Name = "ProcOutput";
             this.ProcOutput.ReadOnly = true;
             this.ProcOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ProcOutput.Size = new System.Drawing.Size(972, 85);
+            this.ProcOutput.Size = new System.Drawing.Size(841, 85);
             this.ProcOutput.TabIndex = 4;
             // 
             // ServerList
@@ -124,7 +124,7 @@
             this.ServerList.Location = new System.Drawing.Point(6, 20);
             this.ServerList.MultiSelect = false;
             this.ServerList.Name = "ServerList";
-            this.ServerList.Size = new System.Drawing.Size(972, 256);
+            this.ServerList.Size = new System.Drawing.Size(841, 256);
             this.ServerList.TabIndex = 4;
             this.ServerList.UseCompatibleStateImageBehavior = false;
             this.ServerList.View = System.Windows.Forms.View.Details;
@@ -133,11 +133,12 @@
             // name
             // 
             this.name.Text = "标签";
-            this.name.Width = 120;
+            this.name.Width = 100;
             // 
             // type
             // 
             this.type.Text = "类型";
+            this.type.Width = 50;
             // 
             // local_port
             // 
@@ -157,19 +158,32 @@
             // host
             // 
             this.host.Text = "域名";
-            this.host.Width = 180;
+            this.host.Width = 100;
             // 
             // use_encryption
             // 
             this.use_encryption.Text = "加密";
+            this.use_encryption.Width = 50;
             // 
             // use_compression
             // 
             this.use_compression.Text = "压缩";
+            this.use_compression.Width = 50;
             // 
             // tls_enable
             // 
             this.tls_enable.Text = "TLS";
+            this.tls_enable.Width = 50;
+            // 
+            // isVisitor
+            // 
+            this.isVisitor.Text = "访问模式";
+            this.isVisitor.Width = 80;
+            // 
+            // server_name
+            // 
+            this.server_name.Text = "访问标签";
+            this.server_name.Width = 80;
             // 
             // ServerConfig
             // 
@@ -262,15 +276,6 @@
             this.exit_toolStripMenuItem.Text = "退出";
             this.exit_toolStripMenuItem.Click += new System.EventHandler(this.Exit_toolStripMenuItem_Click);
             // 
-            // isVisitor
-            // 
-            this.isVisitor.Text = "访问模式";
-            // 
-            // server_name
-            // 
-            this.server_name.Text = "访问标签";
-            this.server_name.Width = 92;
-            // 
             // RdpConfig
             // 
             this.RdpConfig.Location = new System.Drawing.Point(295, 13);
@@ -285,7 +290,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1009, 453);
+            this.ClientSize = new System.Drawing.Size(878, 453);
             this.Controls.Add(this.RdpConfig);
             this.Controls.Add(this.AddItem);
             this.Controls.Add(this.ServerConfig);

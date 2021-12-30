@@ -12,6 +12,8 @@ namespace FrpClient_Win
         public string strToken = "";
         public string strUser = "";
         public int nAdminPort = 7400;
+        public string strAdminUser = "admin";
+        public string strAdminPwd = "admin";
     }
 
     class ItemInfo
@@ -48,6 +50,8 @@ namespace FrpClient_Win
         private const string strServerToken = "token";
         private const string strServerUser = "user";
         private const string strAdminPort = "admin_port";
+        private const string strAdminUser = "admin_user";
+        private const string strAdminPwd = "admin_pwd";
 
         private const string strFrpType = "type";
         private const string strLocalPort = "local_port";
@@ -84,6 +88,8 @@ namespace FrpClient_Win
             cServerinfo.strToken = GetValue(strCommon, strServerToken);
             cServerinfo.strUser = GetValue(strCommon, strServerUser);
             cServerinfo.nAdminPort = Convert.ToInt32(GetValue(strCommon, strAdminPort));
+            cServerinfo.strAdminUser = GetValue(strCommon, strAdminUser);
+            cServerinfo.strAdminPwd = GetValue(strCommon, strAdminPwd);
 
             //读取各个项
             string[] arrSections = GetSectionNames(strFileName);
@@ -189,6 +195,8 @@ namespace FrpClient_Win
                 WritePrivateProfileString(strCommon, strServerUser, cServerinfo.strUser, strFileName);
             if(cServerinfo.nAdminPort!=0)
                 WritePrivateProfileString(strCommon, strAdminPort, cServerinfo.nAdminPort.ToString(), strFileName);
+            WritePrivateProfileString(strCommon, strAdminUser, cServerinfo.strAdminUser, strFileName);
+            WritePrivateProfileString(strCommon, strAdminPwd, cServerinfo.strAdminPwd, strFileName);
 
             //写各个项
             foreach (var info in listItems)
