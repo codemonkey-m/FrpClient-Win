@@ -125,7 +125,7 @@ namespace FrpClient_Win
             this.MinimizeBox = false;
             this.Name = "RdpConfigDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Rdp配置";
+            this.Text = "RDP配置";
             this.Load += new System.EventHandler(this.RdpConfigDlg_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
